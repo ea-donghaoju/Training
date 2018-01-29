@@ -11,7 +11,6 @@ $cSession = isset($_SESSION['condition'])?$_SESSION['condition']:"";
 $result = "";
 $errorStr = "";
 
-
 //需要判断是insert或者是search，只使用其中一种方法
     //判断searchName是否为空，不为空进行查询
     if(!empty($_POST['searchName'])){
@@ -35,13 +34,7 @@ $errorStr = "";
     elseif(empty($_POST['searchName'])){
         $errorStr = "请输入内容<br/>";
     }
-
 require('View/index.php');
-
-
-
-
-
 
     //-----查询方法-----
     function search($name,$searchCondition)
@@ -55,7 +48,6 @@ require('View/index.php');
             return false;;
         }
     }
-
     //-----添加方法-----
     function insert($Name)
     {
@@ -67,46 +59,3 @@ require('View/index.php');
             return false;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//if(!empty($_POST['name'])){
-//    if(!empty($name)){
-//        $search = $searchModel->find($name,$condition);
-//        return $search;
-//    }else{
-//        $search = "";
-//        return $search;
-//    }
-//}else{
-//    $search = "";
-//    return $search;
-//}
