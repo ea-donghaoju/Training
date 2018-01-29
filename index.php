@@ -49,10 +49,10 @@ require('View/index.php');
         }
     }
     //-----添加方法-----
-    function insert($Name)
+    function insert($name)
     {
         $searchModel = new searchModel();
-        $insert = $searchModel->insertData($Name);
+        $insert = $searchModel->insertData($name);
         if($insert == true){
             return $insert;
         }else{
