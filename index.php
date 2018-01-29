@@ -37,12 +37,6 @@ $errorStr = "";
     }
 
 require('View/index.php');
-
-
-
-
-
-
     //-----查询方法-----
     function search($name,$searchCondition)
     {
@@ -67,46 +61,3 @@ require('View/index.php');
             return false;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//if(!empty($_POST['name'])){
-//    if(!empty($name)){
-//        $search = $searchModel->find($name,$condition);
-//        return $search;
-//    }else{
-//        $search = "";
-//        return $search;
-//    }
-//}else{
-//    $search = "";
-//    return $search;
-//}
