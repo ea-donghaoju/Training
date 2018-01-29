@@ -35,8 +35,8 @@ $errorStr = "";
     elseif(empty($_POST['searchName'])){
         $errorStr = "请输入内容<br/>";
     }
-
 require('View/index.php');
+
     //-----查询方法-----
     function search($name,$searchCondition)
     {
@@ -49,7 +49,6 @@ require('View/index.php');
             return false;;
         }
     }
-
     //-----添加方法-----
     function insert($Name)
     {
