@@ -2,7 +2,6 @@
 session_start();
 header("Content-type:text/html;charset=utf-8");
 require('Model/searchModel.php');
-require('Controller/insertUserController.php');
 //保留上一次选择的条件值
 $_SESSION['condition'] = isset($_POST['condition'])?$_POST['condition']:"";
 $cSession = isset($_SESSION['condition'])?$_SESSION['condition']:"";
@@ -41,15 +40,3 @@ $errorStr = "";
             return false;;
         }
     }
-
-    //-----添加方法-----
-//    function insert($name)
-//    {
-//        $searchModel = new searchModel();
-//        $insert = $searchModel->insertData($name);
-//        if($insert == true){
-//            return $insert;
-//        }else{
-//            return false;
-//        }
-//    }
