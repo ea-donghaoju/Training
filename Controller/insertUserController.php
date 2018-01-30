@@ -1,7 +1,6 @@
 <?php
-require('../Model/searchModel.php');
 header("Content-type:text/html;charset=utf-8");
-
+//require('../View/insertUserView.php');
 
 class insertUser{
     function insert($name){

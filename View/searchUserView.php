@@ -5,6 +5,7 @@
     <title>Document</title>
 </head>
 <body>
+
 <form action="index.php" method="post" name="searchData">
     请输入：<input type="text" name="searchName"/>&nbsp;&nbsp;
     选择条件：<select name="searchCondition">
@@ -40,5 +41,6 @@
     ?>
 </table>
 <hr/>
+<!--<a href="View/insertUserView.php">添加</a>-->
 </body>
 </html>
