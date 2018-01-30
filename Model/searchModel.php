@@ -5,6 +5,7 @@ class searchModel{
     public $user = "root";
     public $pwd  ="root";
     public $dbName = "dong";
+
     //-----链接数据库执行语句-----
     function linkDB($sql){
             $mysqli=new mysqli($this->host,$this->user,$this->pwd,$this->dbName);//链接数据库

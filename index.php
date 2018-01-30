@@ -9,6 +9,7 @@ $cSession = isset($_SESSION['condition'])?$_SESSION['condition']:"";
 $result = "";
 $errorStr = "";
 
+
     //判断searchName是否为空，不为空进行查询
     if(!empty($_POST['searchName'])){
         if($_POST['searchCondition']=='Name'){
