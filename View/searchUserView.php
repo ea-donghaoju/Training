@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form action="index.php" method="post" name="searchData">
+<form action="/dev/searchUser" method="post" name="searchData">
     请输入：<input type="text" name="searchName"/>&nbsp;&nbsp;
     选择条件：<select name="searchCondition">
             <option value="Name" <?php if($cSession=='Name'){ ?>selected="selected"<?php } ?>>名前</option>
