@@ -27,9 +27,6 @@ if (0 < count($params)) {
 
 // -----execute （执行）-----
 $className = $controller . 'Controller';
-echo $className;
 require 'Controller/' . $className . '.php';
 $controllerInstance = new $className();
 $controllerInstance->$action();
-
-exit;
