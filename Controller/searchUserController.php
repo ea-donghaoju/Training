@@ -7,12 +7,9 @@ class searchUserController
     function index()
     {
         //保留上一次选择的条件值
-        $_SESSION['condition'] = isset($_POST['condition'])?$_POST['condition']:"";
-        $cSession = isset($_SESSION['condition'])?$_SESSION['condition']:"";
-
-        //如果有报错就把下面的两个变量注释一下
-            $result = "";
-            $errorStr = "";
+        $_SESSION['searchCondition'] = isset($_POST['searchCondition'])?$_POST['searchCondition']:"";
+        $cSession = isset($_SESSION['searchCondition'])?$_SESSION['searchCondition']:"";
+        //判断输入内容
         if (!empty($_POST['searchName'])) {
             if ($_POST['searchCondition'] == 'Name') {
                 $searchCondition = 'name';
