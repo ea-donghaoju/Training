@@ -28,16 +28,16 @@ class searchUserController
 
         require('View/searchUserView.php');
     }
-        //-----查询方法-----
-        function search($name, $searchCondition)
-        {
-            $searchModel = new databaseModel();
-            $search = $searchModel->findData($name, $searchCondition);
-            //做判断$search有没有查到
-            if ($search) {
-                return $search;
-            } else {
-                return false;;
-            }
+        //-----查询-----
+    function search($name, $searchCondition)
+    {
+        $databaseModel = new databaseModel();
+        $searchResult = $databaseModel->findData($name, $searchCondition);
+        //做判断$search有没有查到
+        if ($searchResult) {
+            return $searchResult;
+        } else {
+            return false;;
         }
     }
+}

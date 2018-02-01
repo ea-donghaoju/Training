@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>添加用户</h1>
-    <form action="insert.php" method="post" name="insertData">
+    <form action="/dev/insertUser" method="post" name="insertData">
         名前：<input type="text" name="insertName"/>
         <!--    诞生日：<input type="text" name="insertBirthday"/>-->
         <!--    电话番号：<input type="text"name="insertTel"/>-->
