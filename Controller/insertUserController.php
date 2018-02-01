@@ -12,10 +12,10 @@ class insertUserController
     }
 
     function insert($name){
-        $searchModel = new databaseModel();
-        $insert = $searchModel->insertData($name);
-        if($insert == true){
-            return $insert;
+        $databaseModel = new databaseModel();
+        $insertResult = $databaseModel->insertData($name);
+        if($insertResult == true){
+            return $insertResult;
         }else{
             return false;
         }
