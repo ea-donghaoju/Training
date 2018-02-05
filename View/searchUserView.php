@@ -41,6 +41,5 @@
     ?>
 </table>
 <hr/>
-<!--<a href="View/insertUserView.php">添加</a>-->
 </body>
 </html>
