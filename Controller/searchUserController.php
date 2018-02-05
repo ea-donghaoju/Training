@@ -10,7 +10,9 @@ class searchUserController
         $_SESSION['searchCondition'] = isset($_POST['searchCondition'])?$_POST['searchCondition']:"";
         $cSession = isset($_SESSION['searchCondition'])?$_SESSION['searchCondition']:"";
         //清除左右两边的空格
-        @$searchName = trim($_POST['searchName']);
+        if(isset($_POST['searchName'])){
+            $searchName = trim($_POST['searchName']);
+        }
         //判断输入内容
         if (!empty($searchName)) {
             if ($_POST['searchCondition'] == 'Name') {
