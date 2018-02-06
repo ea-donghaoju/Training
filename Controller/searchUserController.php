@@ -24,7 +24,6 @@ class searchUserController
 
         if($searchCondition === false){
             //Post error
-            die("ERROR");
         }
 
         //判断输入内容
@@ -36,7 +35,7 @@ class searchUserController
                     $errorStr = "未查询到";
                 }
             }else{
-                $errorStr = "输入类型为英文";
+                $errorStr = "输入类型为英文或数字";
             }
         }else{
             $errorStr = "请输入内容";
