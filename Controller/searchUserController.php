@@ -9,8 +9,12 @@ class searchUserController
         //保留上一次选择的条件值
         $_SESSION['searchCondition'] = isset($_POST['searchCondition'])?$_POST['searchCondition']:"";
         $cSession = isset($_SESSION['searchCondition'])?$_SESSION['searchCondition']:"";
+        //清除左右两边的空格
+        if(isset($_POST['searchName'])){
+            $searchName = trim($_POST['searchName']);
+        }
         //判断输入内容
-        if (!empty($_POST['searchName'])) {
+        if (!empty($searchName)) {
             if ($_POST['searchCondition'] == 'Name') {
                 $searchCondition = 'name';
             } elseif ($_POST['searchCondition'] == 'Tel') {
@@ -18,7 +22,7 @@ class searchUserController
             } elseif ($_POST['searchCondition'] == 'Birthday') {
                 $searchCondition = 'Birthday';
             }
-            $result = $this->search($_POST['searchName'], $searchCondition);//给search()传值
+            $result = $this->search($searchName, $searchCondition);//给search()传值
             if($result == null){
                 $errorStr = "未查询到";
             }
@@ -28,7 +32,9 @@ class searchUserController
 
         require('View/searchUserView.php');
     }
-        //-----查询-----
+
+
+        //-----查询数据-----
     function search($name, $searchCondition)
     {
         $databaseModel = new databaseModel();

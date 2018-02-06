@@ -7,16 +7,26 @@
 <body>
 <h1>添加用户</h1>
     <form action="/dev/insertUser" method="post" name="insertData">
-        名前：<input type="text" name="insertName"/>
-        <!--    诞生日：<input type="text" name="insertBirthday"/>-->
-        <!--    电话番号：<input type="text"name="insertTel"/>-->
+        <!--添加姓名的验证规则-->
+        名前：<input type="text" name="insertName" maxlength="11"/>
         <input type="submit" value="提交"/>
     </form>
-    <div style="font-size: 16px;color: #FF0000">
+    <div style="font-size: 16px;color: #000">
         <!--    添加成功或者失败 出现提示-->
         <?php
-        if(!empty($errorStr) ){
-            echo $errorStr . "<br/>";
+        if(!empty($displayMessage) ){
+            //正确的提示
+            echo $displayMessage . "<br/>";
+        }?>
+    </div>
+
+    <div style="font-size: 16px;color: #f00">
+        <?php
+        if(!empty($errorMessage)){
+            foreach($errorMessage as $errorMess){
+                //错误的提示
+                echo $errorMess."<br/>";
+            }
         }?>
     </div>
 </body>

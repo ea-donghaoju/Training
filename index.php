@@ -16,7 +16,7 @@ if (0 < count($params)) {
         $controller = $params[2];
     } else {
         //error
-        $controller = "";
+        $controller = "searchUser";
     }
     if(isset($params[3])){
         $action = $params[3];
