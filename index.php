@@ -27,6 +27,14 @@ if (0 < count($params)) {
 
 // -----execute （执行）-----
 $className = $controller . 'Controller';
-require 'Controller/' . $className . '.php';
-$controllerInstance = new $className();
-$controllerInstance->$action();
+
+$name = 'Controller/' . $className . '.php';
+if(file_exists($name)){
+    include 'Controller/' . $className . '.php';
+    $controllerInstance = new $className();
+    $controllerInstance->$action();
+}else{
+    echo "<h1> error </h1>";
+}
+
+

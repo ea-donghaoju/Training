@@ -31,6 +31,9 @@
         if(!empty($result)){
             foreach($result as $key=>$v)
             {
+                $v[1] = htmlspecialchars($v[1]);
+                $v[2] = htmlspecialchars($v[2]);
+                $v[3] = htmlspecialchars($v[3]);
                 echo "<tr>
                 <td>$v[1]</td>
                 <td>$v[2]</td>
