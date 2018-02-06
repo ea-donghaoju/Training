@@ -31,10 +31,13 @@
         if(!empty($result)){
             foreach($result as $key=>$v)
             {
+                $userName = htmlspecialchars($v[1]);
+                $userBirthday = htmlspecialchars($v[2]);
+                $userTel = htmlspecialchars($v[3]);
                 echo "<tr>
-                <td>$v[1]</td>
-                <td>$v[2]</td>
-                <td>$v[3]</td>
+                <td>$userName</td>
+                <td>$userBirthday</td>
+                <td>$userTel</td>
                       </tr>";
             }
         }
