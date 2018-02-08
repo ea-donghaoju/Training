@@ -8,6 +8,10 @@ class insertUserController
     {
         //initiate error flg
         $errorFlg = false;
+        $nameErrorMSG = array();
+        $birthdayErrorMSG = array();
+        $numberErrorMSG = array();
+
         //判断输入姓名是否为空
         if(!empty($_POST['insertName'])) {
             $insertName = trim($_POST['insertName']);
