@@ -22,9 +22,9 @@ class databaseModel{
         return $result->fetch_all();
     }
     //-----添加方法-----
-    function insertData($Name)
+    function insertData($Name,$Birthday,$Tel)
     {
-        $sql = "insert into test (Name) values ('{$Name}')";
+        $sql = "insert into test (Name,Birthday,Tel) values ('{$Name}','{$Birthday}','{$Tel}')";
         $result = $this->execSQL($sql);
         return $result;
     }
