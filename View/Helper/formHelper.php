@@ -10,11 +10,15 @@ class formHelper
 
             foreach ($errorMsg as $msg) {
                 //错误的提示
-                echo htmlspecialchars($msg) . '</br>';
+                echo $this->h($msg) . '</br>';
             }
 
             echo '</div>';
         }
+    }
 
+    function h($str)
+    {
+        return htmlspecialchars($str);
     }
 }
