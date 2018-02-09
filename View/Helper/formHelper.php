@@ -2,19 +2,25 @@
 
 class formHelper
 {
-    function displayError($errorMsg)
+    // input str
+    function h($str)
     {
-        if (!empty($errorMsg)) {
+        return htmlspecialchars($str);
+    }
 
+    // input error array
+    function displayError($errorMsgArray)
+    {
+        if (!empty($errorMsgArray) ) {
             echo '<div style="font-size: 16px;color: #f00">';
-
-            foreach ($errorMsg as $msg) {
-                //错误的提示
-                echo htmlspecialchars($msg) . '</br>';
-            }
-
+                    foreach ($errorMsgArray as $errorMsg) {
+                        //错误的提示
+                        echo $this->h($errorMsg) . '</br>';
+                    }
             echo '</div>';
         }
 
     }
+
+
 }

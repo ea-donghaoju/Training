@@ -2,6 +2,7 @@
 include('Model/databaseModel.php');
 
 
+
 class searchUserController
 {
     function index()
@@ -13,10 +14,12 @@ class searchUserController
         //POST Validation
         //清除搜索内容左右两边的空格
         $searchName = '';
+        $errorMsgArr  = array();
+
+
         if(isset($_POST['searchName'])){
             $searchName = trim($_POST['searchName']);
         }
-
         $searchCondition = false;
         if(isset($_POST['searchCondition'])){
             $searchCondition = $this->checkPostCondition($_POST['searchCondition']);
@@ -32,14 +35,16 @@ class searchUserController
             {
                 $result = $this->search($searchName, $searchCondition);//给search()传值
                 if($result == null){
-                    $errorStr = "未查询到";
+                    $errorMsgArr[] = "未查询到";
                 }
             }else{
-                $errorStr = "输入类型为英文或数字";
+                $errorMsgArr[] = "输入类型为英文或数字";
             }
         }else{
-            $errorStr = "请输入内容";
+            $errorMsgArr[] = "请输入内容";
         }
+        require('View/Helper/formHelper.php');
+        $formHelper = new formHelper();
         require('View/searchUserView.php');
     }
 

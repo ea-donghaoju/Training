@@ -8,53 +8,50 @@ class insertUserController
     {
         //initiate error flg
         $errorFlg = false;
-        $nameErrorMSG = array();
-        $birthdayErrorMSG = array();
-        $numberErrorMSG = array();
+        $errorMsgArr = array();
+        $errorMsgArr['name'] = array();
+        $errorMsgArr['birthday'] = array();
+        $errorMsgArr['Tel'] = array();
 
         //判断输入姓名是否为空
         if(!empty($_POST['insertName'])) {
             $insertName = trim($_POST['insertName']);
             //正则判断输入内容类型，提示错误信息
             if ($this->hasLengthError($insertName) === true) {
-                $nameErrorMSG[] = "长度应为1-10个字节";
-                $errorFlg = true;
+                $errorMsgArr['name'][] = "长度应为1-10个字节";
             }
             if ($this->nameError($insertName) === true) {
-                $nameErrorMSG[] = "名字应为英文类型";
-                $errorFlg = true;
+                $errorMsgArr['name'][] = "名字应为英文类型";
             }
         }else{
-            $nameErrorMSG[] = "请输入内容";
-            $errorFlg = true;
+            $errorMsgArr['name'][] = "请输入内容";
         }
         //判断输入生日是否为空
         if(!empty($_POST['insertBirthday'])){
             $insertBirthday = trim($_POST['insertBirthday']);
             if($this->checkBirthday($insertBirthday) === false){
-                $birthdayErrorMSG[] = "选择日期不能超过今天";
+                $errorMsgArr['birthday'][] = "选择日期不能超过今天";
                 $errorFlg = true;
             }
         }else{
-            $birthdayErrorMSG[] = "请输入内容";
+            $errorMsgArr['birthday'][] = "请输入内容";
             $errorFlg = true;
         }
         //判断输入手机号码是否为空
         if(!empty($_POST['insertTel'])){
             $insertTel = trim($_POST['insertTel']);
             if($this->checkPhoneNumber($insertTel) === false){
-                $numberErrorMSG[] = "应为11位数字手机号码格式";
+                $errorMsgArr['Tel'][] = "应为11位数字手机号码格式";
                 $errorFlg = true;
             }
         }else{
-            $numberErrorMSG[] = "请输入内容";
+            $errorMsgArr['Tel'][] = "请输入内容";
             $errorFlg = true;
         }
-
         //错误标记
-        if($errorFlg === false){
+        if(empty($errorMsgArr)){
             $result = $this->insert($insertName,$insertBirthday,$insertTel);
-            $displayMessage = "OK";
+
         }
         require('View/Helper/formHelper.php');
         $formHelper = new formHelper();
