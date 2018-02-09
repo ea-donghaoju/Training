@@ -17,9 +17,8 @@
 </form><br/>
 <div style="font-size: 16px;color: #FF0000">
     <?php
-    if(!empty($errorStr) ){
-        echo $errorStr . "<br/>";
-    }?>
+       $formHelper->displayError($errorMsg);
+    ?>
 </div>
 <table width="400px" border="1" cellpadding="0" cellspacing="0">
     <tr>
@@ -31,14 +30,11 @@
         if(!empty($result)){
             foreach($result as $key=>$v)
             {
-                $userName = htmlspecialchars($v[1]);
-                $userBirthday = htmlspecialchars($v[2]);
-                $userTel = htmlspecialchars($v[3]);
-                echo "<tr>
-                <td>$userName</td>
-                <td>$userBirthday</td>
-                <td>$userTel</td>
-                      </tr>";
+                echo "<tr>";
+                echo "<td>" . $formHelper->h($v[1]) . "</td>";
+                echo "<td>" . $formHelper->h($v[2]) . "</td>";
+                echo "<td>" . $formHelper->h($v[3]) . "</td>";
+                echo "</tr>";
             }
         }
     ?>

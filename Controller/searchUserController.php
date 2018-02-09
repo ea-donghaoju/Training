@@ -1,11 +1,14 @@
 <?php
 include('Model/databaseModel.php');
+require('View/Helper/formHelper.php');
+
 
 
 class searchUserController
 {
     function index()
     {
+        $formHelper = new formHelper();
         //保留上一次选择的条件值
         $_SESSION['searchCondition'] = isset($_POST['searchCondition'])?$_POST['searchCondition']:"";
         $cSession = isset($_SESSION['searchCondition'])?$_SESSION['searchCondition']:"";
@@ -13,6 +16,7 @@ class searchUserController
         //POST Validation
         //清除搜索内容左右两边的空格
         $searchName = '';
+        $errorMsg = array();
         if(isset($_POST['searchName'])){
             $searchName = trim($_POST['searchName']);
         }
@@ -32,14 +36,15 @@ class searchUserController
             {
                 $result = $this->search($searchName, $searchCondition);//给search()传值
                 if($result == null){
-                    $errorStr = "未查询到";
+                    $errorMsg[] = "未查询到";
                 }
             }else{
-                $errorStr = "输入类型为英文或数字";
+                $errorMsg[] = "输入类型为英文或数字";
             }
         }else{
-            $errorStr = "请输入内容";
+            $errorMsg[] = "请输入内容";
         }
+
         require('View/searchUserView.php');
     }
 
