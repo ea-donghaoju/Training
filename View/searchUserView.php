@@ -17,7 +17,7 @@
 </form><br/>
 <div style="font-size: 16px;color: #FF0000">
     <?php
-       $formHelper->displayError($errorMsg);
+       $formHelper->displayError($errorMsgArr);
     ?>
 </div>
 <table width="400px" border="1" cellpadding="0" cellspacing="0">

@@ -2,7 +2,6 @@
 
 class formHelper
 {
-
     // input str
     function h($str)
     {
@@ -20,6 +19,7 @@ class formHelper
                     }
             echo '</div>';
         }
+
     }
 
 
