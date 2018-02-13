@@ -1,4 +1,3 @@
-<?php //session_start(); ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,12 +10,11 @@
 <div style="font-size: 16px;color: #000">
     <!--    添加成功出现提示-->
     <?php
-    if(empty($errorMsgArr) ){
+    if($errorFlg === false){
         //正确的提示
         echo "OK" ;
     }?>
 </div>
-<!--    <form action="/dev/insertUser" method="post" name="insertData">-->
         <form action="/dev/insertUser" method="post" name="insertData">
         <!--添加姓名的验证规则-->
         <div style="width: 280px;" >
@@ -35,9 +33,11 @@
                 <?php
                     $formHelper->displayError($errorMsgArr['Tel']);
                 ?>
-<!--            <p>部门：<input type="text" name=""/></p>-->
-<!--            <p>职位：<input type="text" name=""/></p>-->
-        <input type="submit" value="提交"/>
+<!--<p>部门：<input type="text" name=""/></p>-->
+<!--<p>职位：<input type="text" name=""/></p>-->
+<!--            <button type="submit">提交</button>-->
+            <input type="submit" value="提交"/>
+<!--<a href="insertUser/insertCheck">???</a>-->
         </div>
 
     </form>

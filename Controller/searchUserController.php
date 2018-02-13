@@ -1,8 +1,5 @@
 <?php
 include('Model/databaseModel.php');
-
-
-
 class searchUserController
 {
     function index()
@@ -42,8 +39,9 @@ class searchUserController
             }
         }else{
             $searchName = "";
-            $result = $this->search($searchName, $searchCondition);//给search()传值
+            $searchCondition= "name";
             $errorMsgArr[] = "请输入内容";
+            $result = $this->search($searchName, $searchCondition);//给search()传值
         }
         require('View/Helper/formHelper.php');
         $formHelper = new formHelper();
