@@ -17,14 +17,14 @@ class databaseModel{
 
     function findData($name,$searchCondition)
     {
-        $sql = "select * from test where {$searchCondition} like '%{$name}%' ";
+        $sql = "select * from member where {$searchCondition} like '%{$name}%' ";
         $result = $this->execSQL($sql);
         return $result->fetch_all();
     }
     //-----添加方法-----
     function insertData($Name,$Birthday,$Tel)
     {
-        $sql = "insert into test (Name,Birthday,Tel) values ('{$Name}','{$Birthday}','{$Tel}')";
+        $sql = "insert into member (Name,Birthday,Tel) values ('{$Name}','{$Birthday}','{$Tel}')";
         $result = $this->execSQL($sql);
         return $result;
     }

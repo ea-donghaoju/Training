@@ -48,13 +48,15 @@ class insertUserController
             $errorMsgArr['Tel'][] = "请输入内容";
             $errorFlg = true;
         }
-        //错误标记
+        //如果没有错误标记(errorFlg)就提交
         if(empty($errorMsgArr)){
-            $result = $this->insert($insertName,$insertBirthday,$insertTel);
+            //$result = $this->insert($insertName,$insertBirthday,$insertTel);
+            require('View/insertUserCheckView.php');
 
         }
         require('View/Helper/formHelper.php');
         $formHelper = new formHelper();
+        echo "        sb";
         require('View/insertUserView.php');
     }
 
@@ -108,4 +110,10 @@ class insertUserController
             return false;
         }
     }
+
+    //-------重复确认输入-------
+    function insertCheck(){
+        require('View/insertUserCheckView.php');
+    }
+
 }

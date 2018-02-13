@@ -41,6 +41,8 @@ class searchUserController
                 $errorMsgArr[] = "输入类型为英文或数字";
             }
         }else{
+            $searchName = "";
+            $result = $this->search($searchName, $searchCondition);//给search()传值
             $errorMsgArr[] = "请输入内容";
         }
         require('View/Helper/formHelper.php');
