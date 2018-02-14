@@ -7,26 +7,30 @@
 <body>
 <h1>社員管理システム</h1>
 
-<?php echo $_SESSION['insertName']."       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;←name的值<br/>"; ?>
-<?php echo $_POST['insertName']."       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;←name的值<br/>"; ?>
-<?php echo $_SESSION['insertBirthday']."       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;←birth的值<br/>"; ?>
-<?php echo $_POST['insertBirthday']."       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;←birth的值<br/>"; ?>
-<?php echo $_SESSION['insertTel']."       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;←tel的值<br/>"; ?>
-<?php echo $_POST['insertTel']."       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;←tel的值<br/>"; ?>
-
 <form action="/dev/insertUser/insertCheck" method="post">
     <div style="width: 280px;" >
     <p>名前：<input type="text" name="insertName"  style="float: right" readonly="on"  value="<?php echo $_POST['insertName'] ?>"/></p>
     <p>诞生日：<input type="text" name="insertBirthday" style="float: right;" readonly="on" value="<?php echo $_POST['insertBirthday'] ?>"/></p>
-    <p>电话番号：<input type="text" name="insertTel" style="float: right;" readonly="on" value="<?php echo $_POST['insertTel'] ?>"/></p>
+    <p>职位：<input type="hidden" name="insertDepartment" value="<?php $_POST['departmentCondition']; ?>" />
+        <?php
+        //判断属于什么职位
+        $department = $_POST['departmentCondition'];
+        if( $department == 1){
+            echo "人事部";
+        }elseif( $department == 2){
+            echo "総務部";
+        }elseif( $department== 3){
+            echo "開発部";
+        }
+        ?>
+    </p>
+
 <!--    部门：<p></p>-->
-<!--    职位：<p></p>-->
     </div>
     <hr/>
     <p>この内容で登録します。よろしいですか?</p>
-    <span>&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="登録"/>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-    <span>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="修正"/>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <span><input type="submit" value="登録"/></span>
+    <span><input type="button" value="修正"/></span>
 </form>
-
 </body>
 </html>

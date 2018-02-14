@@ -54,7 +54,7 @@ class searchUserController
     function checkPostCondition($postCondition)
     {
         if ($postCondition == 'Name'
-            || $postCondition == 'Tel'
+            || $postCondition == 'Department'
             || $postCondition == 'Birthday') {
             return $postCondition;
         }

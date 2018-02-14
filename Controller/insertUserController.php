@@ -11,7 +11,7 @@ class insertUserController
         $errorMsgArr = array();
         $errorMsgArr['name'] = array();
         $errorMsgArr['birthday'] = array();
-        $errorMsgArr['Tel'] = array();
+        $errorMsgArr['Department'] = array();
         //判断输入姓名是否为空
         if(!empty($_POST['insertName'])) {
             $insertName = trim($_POST['insertName']);
@@ -39,21 +39,9 @@ class insertUserController
             $errorMsgArr['birthday'][] = "请输入内容";
             $errorFlg = true;
         }
-        //判断输入手机号码是否为空
-        if(!empty($_POST['insertTel'])){
-            $insertTel = trim($_POST['insertTel']);
-                if($this->checkPhoneNumber($insertTel) === false){
-                    $errorMsgArr['Tel'][] = "应为11位数字手机号码格式";
-                    $errorFlg = true;
-                }
-        }else{
-            $errorMsgArr['Tel'][] = "请输入内容";
-            $errorFlg = true;
-        }
-
+        $department = $_POST['departmentCondition'];
         //如果没有存入错误标记(errorFlg)，则跳转到insertCheck页面中确认信息
         if($errorFlg === false){
-//            $result = $this->insert($insertName,$insertBirthday,$insertTel);
             require('View/insertUserCheckView.php');
 //            $this->insertCheck();
         }else{
@@ -82,10 +70,11 @@ class insertUserController
             return true;
     }
 
-    //-------验证手机号-------
-    function checkPhoneNumber($insertTel)
+    //-------验证职位（之前的手机号）-------
+    function checkDepartment($insertDepartment)
     {
-        if(preg_match('/^1[34578]{1}\d{9}$/',$insertTel)){
+        //if(preg_match('/^1[34578]{1}\d{9}$/',$insertDepartment)){
+        if(preg_match('/^\d{3}$/',$insertDepartment)){
             return true;
         }
             return false;
@@ -104,10 +93,10 @@ class insertUserController
     }
 
     //-------增加数据-------
-    function insert($name,$birthday,$Tel)
+    function insert($name,$birthday,$Department)
     {
         $databaseModel = new databaseModel();
-        $insertResult = $databaseModel->insertData($name,$birthday,$Tel);
+        $insertResult = $databaseModel->insertData($name,$birthday,$Department);
         if($insertResult == true){
             return $insertResult;
         }else{
@@ -116,14 +105,13 @@ class insertUserController
     }
 
     //-------重复确认输入-------
-    function insertCheck($insertName,$insertBirthday,$insertTel){
-
+    function insertCheck($insertName,$insertBirthday,$department){
+        //如果通过审查元素修改了输入内容，再次判断
         $errorFlg = false;
         $errorMsgArr = array();
         $errorMsgArr['name'] = array();
         $errorMsgArr['birthday'] = array();
-        $errorMsgArr['Tel'] = array();
-
+        $errorMsgArr['Department'] = array();
         if(!empty($_POST['insertName'])) {
             $insertName = trim($_POST['insertName']);
             //正则判断输入内容类型，提示错误信息
@@ -150,35 +138,19 @@ class insertUserController
             $errorMsgArr['birthday'][] = "请输入内容";
             $errorFlg = true;
         }
-        //判断输入手机号码是否为空
-        if(!empty($_POST['insertTel'])){
-            $insertTel = trim($_POST['insertTel']);
-            if($this->checkPhoneNumber($insertTel) === false){
-                $errorMsgArr['Tel'][] = "应为11位数字手机号码格式";
-                $errorFlg = true;
-            }
-        }else{
-            $errorMsgArr['Tel'][] = "请输入内容";
-            $errorFlg = true;
-        }
+        $department = $_POST['departmentCondition'];
         //如果没有errorFlg，执行insert方法添加，返回正确的结果之后进入结果页面。如果结果被人更改，则跳转警告
         if($errorFlg === false) {
-            $result = $this->insert($insertName,$insertBirthday,$insertTel);
+            $result = $this->insert($insertName,$insertBirthday,$department);
                 if($result == true){
+
                     require('View/insertUserSuccessView.php');
                 }else{
                     return false;
                 }
         }else{
+            //如果通过审查元素修改了输入内容，再次判断，报错
             require('View/searchUserView.php');
         }
-
-
-
-
-
-
-
     }
-
 }

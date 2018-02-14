@@ -24,9 +24,9 @@ class databaseModel{
         return $result -> fetch_all();
     }
     //-----添加方法-----
-    function insertData($Name,$Birthday,$Tel)
+    function insertData($Name,$Birthday,$department)
     {
-        $sql = "insert into member (Name,Birthday,Tel) values ('{$Name}','{$Birthday}','{$Tel}')";
+        $sql = "insert into member (Name,Birthday,Department) values ('{$Name}','{$Birthday}','{$department}')";
         $result = $this->execSQL($sql);
         return $result;
     }

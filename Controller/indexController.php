@@ -1,6 +1,4 @@
 <?php
-include('Model/databaseModel.php');
-
 
 class indexController
 {

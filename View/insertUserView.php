@@ -24,18 +24,23 @@
                     $formHelper->displayError($errorMsgArr['name']);
                 ?>
         <p>诞生日：<input type="date" name="insertBirthday" style="float: right;"/></p>
-<!--关于生日的提示-->
+        <!--关于生日的提示-->
                 <?php
                     $formHelper->displayError($errorMsgArr['birthday']);
                 ?>
-        <p>电话番号：<input type="text" name="insertTel" style="float: right;"/></p>
-<!--未输入电话则提示-->
+        <p>部门：
+<!--                 <input type="text" name="insertDepartment" style="float: right;"/>-->
+                 <select name="departmentCondition" >
+                     <option value="1">人事部</option>
+                     <option value="2">総務部</option>
+                     <option value="3">開発部</option>
+                 </select>
+        </p>
+        <!--未输入职位则提示-->
                 <?php
-                    $formHelper->displayError($errorMsgArr['Tel']);
+                    $formHelper->displayError($errorMsgArr['Department']);
                 ?>
 <!--<p>部门：<input type="text" name=""/></p>-->
-<!--<p>职位：<input type="text" name=""/></p>-->
-<!--            <button type="submit">提交</button>-->
             <input type="submit" value="提交"/>
 <!--<a href="insertUser/insertCheck">???</a>-->
         </div>
