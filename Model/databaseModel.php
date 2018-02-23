@@ -19,14 +19,15 @@ class databaseModel{
 
     function findData($name,$searchCondition)
     {
-        $sql = "select * from member where {$searchCondition} like '%{$name}%'";
+     // $sql = "select * from member where {$searchCondition} like '%{$name}%'";
+        $sql = "select member.*,department.department_name from member inner join department on member.Department_id=department.id where {$searchCondition} like '%{$name}%'";
         $result = $this -> execSQL($sql);
         return $result -> fetch_all();
     }
     //-----添加方法-----
     function insertData($Name,$Birthday,$department)
     {
-        $sql = "insert into member (Name,Birthday,Department) values ('{$Name}','{$Birthday}','{$department}')";
+        $sql = "insert into member (Name,Birthday,Department_id) values ('{$Name}','{$Birthday}','{$department}')";
         $result = $this->execSQL($sql);
         return $result;
     }

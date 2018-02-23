@@ -40,7 +40,13 @@
                 <?php
                     $formHelper->displayError($errorMsgArr['Department']);
                 ?>
-<!--<p>部门：<input type="text" name=""/></p>-->
+        <p>职位：
+            <select name="positionCondition" >
+                <option value="1">职位1</option>
+                <option value="2">职位2</option>
+                <option value="3">职位3</option>
+            </select>
+        </p>
             <input type="submit" value="提交"/>
 <!--<a href="insertUser/insertCheck">???</a>-->
         </div>

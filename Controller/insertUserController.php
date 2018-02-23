@@ -39,7 +39,7 @@ class insertUserController
             $errorMsgArr['birthday'][] = "请输入内容";
             $errorFlg = true;
         }
-        $department = $_POST['departmentCondition'];
+        @$department = $_POST['departmentCondition'];
         //如果没有存入错误标记(errorFlg)，则跳转到insertCheck页面中确认信息
         if($errorFlg === false){
             require('View/insertUserCheckView.php');
@@ -138,12 +138,11 @@ class insertUserController
             $errorMsgArr['birthday'][] = "请输入内容";
             $errorFlg = true;
         }
-        $department = $_POST['departmentCondition'];
+        @$department = $_SESSION['departmentCondition'];
         //如果没有errorFlg，执行insert方法添加，返回正确的结果之后进入结果页面。如果结果被人更改，则跳转警告
         if($errorFlg === false) {
             $result = $this->insert($insertName,$insertBirthday,$department);
                 if($result == true){
-
                     require('View/insertUserSuccessView.php');
                 }else{
                     return false;

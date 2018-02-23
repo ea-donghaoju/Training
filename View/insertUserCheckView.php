@@ -6,7 +6,6 @@
 </head>
 <body>
 <h1>社員管理システム</h1>
-
 <form action="/dev/insertUser/insertCheck" method="post">
     <div style="width: 280px;" >
     <p>名前：<input type="text" name="insertName"  style="float: right" readonly="on"  value="<?php echo $_POST['insertName'] ?>"/></p>
@@ -19,12 +18,15 @@
             echo "人事部";
         }elseif( $department == 2){
             echo "総務部";
-        }elseif( $department== 3){
+        }elseif( $department == 3){
             echo "開発部";
         }
         ?>
     </p>
-
+        <?php $_SESSION['insertName'] = $_POST['insertName'];
+            $_SESSION['insertBirthday'] = $_POST['insertBirthday'];
+            $_SESSION['departmentCondition'] = $_POST['departmentCondition'];
+        ?>
 <!--    部门：<p></p>-->
     </div>
     <hr/>
