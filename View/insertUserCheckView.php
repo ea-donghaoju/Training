@@ -10,7 +10,7 @@
     <div style="width: 280px;" >
     <p>名前：<input type="text" name="insertName"  style="float: right" readonly="on"  value="<?php echo $_POST['insertName'] ?>"/></p>
     <p>诞生日：<input type="text" name="insertBirthday" style="float: right;" readonly="on" value="<?php echo $_POST['insertBirthday'] ?>"/></p>
-    <p>职位：<input type="hidden" name="insertDepartment" value="<?php $_POST['departmentCondition']; ?>" />
+    <p>部门：
         <?php
         //判断属于什么职位
         $department = $_POST['departmentCondition'];
@@ -22,6 +22,9 @@
             echo "開発部";
         }
         ?>
+    </p>
+    <p>
+        职位：
     </p>
         <?php $_SESSION['insertName'] = $_POST['insertName'];
             $_SESSION['insertBirthday'] = $_POST['insertBirthday'];

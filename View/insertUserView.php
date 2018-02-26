@@ -29,7 +29,7 @@
                     $formHelper->displayError($errorMsgArr['birthday']);
                 ?>
         <p>部门：
-<!--                 <input type="text" name="insertDepartment" style="float: right;"/>-->
+        <!--<input type="text" name="insertDepartment" style="float: right;"/>-->
                  <select name="departmentCondition" >
                      <option value="1">人事部</option>
                      <option value="2">総務部</option>

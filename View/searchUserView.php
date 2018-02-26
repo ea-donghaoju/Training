@@ -26,6 +26,7 @@
         <td>Name</td>
         <td>Birthday</td>
         <td>Department</td>
+        <td>Position</td>
     </tr>
     <?php
         if(!empty($result)){
@@ -35,6 +36,7 @@
                 echo "<td>" . $formHelper->h($v[1]) . "</td>";//显示姓名
                 echo "<td>" . $formHelper->h($v[2]) . "</td>";//显示生日
                 echo "<td>" . $formHelper->h($v[5]) . "</td>";//显示部门
+                echo "<td>"."</td>";//显示职位
                 echo "</tr>";
             }
         }

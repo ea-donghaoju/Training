@@ -9,7 +9,6 @@
 
 <p>姓名：<?php echo $_SESSION['insertName'] ?></p>
 <p>生日：<?php echo $_SESSION['insertBirthday'] ?></p>
-<p>职位：</p>
 <p>部门：<?php
     //判断属于什么职位
     $department = $_SESSION['departmentCondition'];
@@ -21,6 +20,10 @@
         echo "開発部";
     }
     ?></p>
+<p>职位：<?php
+
+    ?>
+</p>
 <p><?php if($result == true){
         echo "OK";
     }else{
