@@ -1,8 +1,5 @@
 <?php
 include('Model/databaseModel.php');
-
-
-
 class searchUserController
 {
     function index()
@@ -41,7 +38,10 @@ class searchUserController
                 $errorMsgArr[] = "输入类型为英文或数字";
             }
         }else{
+            $searchName = "";
+            $searchCondition= "name";
             $errorMsgArr[] = "请输入内容";
+            $result = $this->search($searchName, $searchCondition);//给search()传值
         }
         require('View/Helper/formHelper.php');
         $formHelper = new formHelper();
@@ -54,7 +54,7 @@ class searchUserController
     function checkPostCondition($postCondition)
     {
         if ($postCondition == 'Name'
-            || $postCondition == 'Tel'
+            || $postCondition == 'Department'
             || $postCondition == 'Birthday') {
             return $postCondition;
         }
@@ -74,3 +74,4 @@ class searchUserController
         }
     }
 }
+//select

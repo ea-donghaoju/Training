@@ -10,6 +10,8 @@ class databaseModel{
     function execSQL($sql){
             $mysqli=new mysqli($this->host,$this->user,$this->pwd,$this->dbName);//链接数据库
             $result=$mysqli->query($sql);
+//            echo "<br>".$sql;
+//            echo "<br>".$mysqli ->error;
             return $result;
     }
 
@@ -17,14 +19,15 @@ class databaseModel{
 
     function findData($name,$searchCondition)
     {
-        $sql = "select * from test where {$searchCondition} like '%{$name}%' ";
-        $result = $this->execSQL($sql);
-        return $result->fetch_all();
+     // $sql = "select * from member where {$searchCondition} like '%{$name}%'";
+        $sql = "select member.*,department.department_name from member inner join department on member.Department_id=department.id where {$searchCondition} like '%{$name}%'";
+        $result = $this -> execSQL($sql);
+        return $result -> fetch_all();
     }
     //-----添加方法-----
-    function insertData($Name,$Birthday,$Tel)
+    function insertData($Name,$Birthday,$department)
     {
-        $sql = "insert into test (Name,Birthday,Tel) values ('{$Name}','{$Birthday}','{$Tel}')";
+        $sql = "insert into member (Name,Birthday,Department_id) values ('{$Name}','{$Birthday}','{$department}')";
         $result = $this->execSQL($sql);
         return $result;
     }

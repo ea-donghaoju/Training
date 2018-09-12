@@ -11,13 +11,13 @@ if ('' != $param) {
 }
 
 // -----set Controller and Action（设置控制器）-----
-$controller = "searchUser";
+$controller = "";
 if (0 < count($params)) {
     if(isset($params[2])){
         $controller = $params[2];
     } else {
         //error
-        $controller = "searchUser";
+        $controller = "index";
     }
     if(isset($params[3])){
         $action = $params[3];
@@ -27,9 +27,10 @@ if (0 < count($params)) {
 }
 
 // -----execute （执行）-----
-$className = $controller . 'Controller';
-
-$name = 'Controller/' . $className . '.php';
+$className = $controller . 'Controller'; //控制器名字
+$name = 'Controller/' . $className . '.php';//文件名字
+print_r($params);
+//判断文件是否存在
 if(file_exists($name)){
     include 'Controller/' . $className . '.php';
     $controllerInstance = new $className();
