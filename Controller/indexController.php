@@ -2,7 +2,8 @@
 
 class indexController
 {
-    function index(){
+    function index(){ 
+       echo "123";die; 
         require('View/index.php');
     }
 }

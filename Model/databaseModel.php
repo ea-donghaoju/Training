@@ -9,7 +9,7 @@ class databaseModel{
     //-----链接数据库执行语句-----
     function execSQL($sql){
             $mysqli=new mysqli($this->host,$this->user,$this->pwd,$this->dbName);//链接数据库
-            $result=$mysqli->query($sql);
+            $result=$mysqli->query($sql); 
 //            echo "<br>".$sql;
 //            echo "<br>".$mysqli ->error;
             return $result;
@@ -17,10 +17,11 @@ class databaseModel{
 
     //-----查询方法-----
 
-    function findData($name,$searchCondition)
+    function findData()
     {
      // $sql = "select * from member where {$searchCondition} like '%{$name}%'";
-        $sql = "select member.*,department.department_name from member inner join department on member.Department_id=department.id where {$searchCondition} like '%{$name}%'";
+     //    $sql = "select member.*,department.department_name from member inner join department on member.Department_id=department.id where {$searchCondition} like '%{$name}%'";
+       $sql = "select name,Brithday from member";
         $result = $this -> execSQL($sql);
         return $result -> fetch_all();
     }
@@ -30,5 +31,5 @@ class databaseModel{
         $sql = "insert into member (Name,Birthday,Department_id) values ('{$Name}','{$Birthday}','{$department}')";
         $result = $this->execSQL($sql);
         return $result;
-    }
+    } 
 }
