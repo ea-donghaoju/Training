@@ -3,7 +3,7 @@ include('Model/databaseModel.php');
 class searchUserController
 {
     function index()
-    {  
+    { 
         //保留上一次选择的条件值
         $_SESSION['searchCondition'] = isset($_POST['searchCondition'])?$_POST['searchCondition']:"";
         $cSession = isset($_SESSION['searchCondition'])?$_SESSION['searchCondition']:"";
