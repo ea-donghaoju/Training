@@ -2,7 +2,7 @@
 
 class indexController
 {
-    function index(){
+    function index() {
         require('View/index.php');
     }
 }

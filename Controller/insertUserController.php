@@ -13,14 +13,14 @@ class insertUserController
         $errorMsgArr['birthday'] = array();
         $errorMsgArr['Department'] = array();
         //判断输入姓名是否为空
-        if(!empty($_POST['insertName'])) {
+        if(!empty($_POST['insertName'])){
             $insertName = trim($_POST['insertName']);
                 //正则判断输入内容类型，提示错误信息
-                if ($this->hasLengthError($insertName) === true) {
+                if($this->hasLengthError($insertName) === true){
                     $errorMsgArr['name'][] = "长度应为1-10个字节";
                     $errorFlg = true;
                 }
-                if ($this->nameError($insertName) === true) {
+                if($this->nameError($insertName) === true){
                     $errorMsgArr['name'][] = "名字应为英文类型";
                     $errorFlg = true;
                 }
@@ -105,21 +105,22 @@ class insertUserController
     }
 
     //-------重复确认输入-------
-    function insertCheck($insertName,$insertBirthday,$department){
+    function insertCheck($insertName,$insertBirthday,$department)
+    {
         //如果通过审查元素修改了输入内容，再次判断
         $errorFlg = false;
         $errorMsgArr = array();
         $errorMsgArr['name'] = array();
         $errorMsgArr['birthday'] = array();
         $errorMsgArr['Department'] = array();
-        if(!empty($_POST['insertName'])) {
+        if(!empty($_POST['insertName'])){
             $insertName = trim($_POST['insertName']);
             //正则判断输入内容类型，提示错误信息
-            if ($this->hasLengthError($insertName) === true) {
+            if($this->hasLengthError($insertName) === true){
                 $errorMsgArr['name'][] = "长度应为1-10个字节";
                 $errorFlg = true;
             }
-            if ($this->nameError($insertName) === true) {
+            if($this->nameError($insertName) === true){
                 $errorMsgArr['name'][] = "名字应为英文类型";
                 $errorFlg = true;
             }
@@ -140,7 +141,7 @@ class insertUserController
         }
         @$department = $_SESSION['departmentCondition'];
         //如果没有errorFlg，执行insert方法添加，返回正确的结果之后进入结果页面。如果结果被人更改，则跳转警告
-        if($errorFlg === false) {
+        if($errorFlg === false){
             $result = $this->insert($insertName,$insertBirthday,$department);
                 if($result == true){
                     require('View/insertUserSuccessView.php');
