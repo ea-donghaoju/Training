@@ -16,11 +16,11 @@ class insertUserController
         if(!empty($_POST['insertName'])){
             $insertName = trim($_POST['insertName']);
                 //正则判断输入内容类型，提示错误信息
-                if ($this->hasLengthError($insertName) === true) {
+                if($this->hasLengthError($insertName) === true){
                     $errorMsgArr['name'][] = "长度应为1-10个字节";
                     $errorFlg = true;
                 }
-                if ($this->nameError($insertName) === true) {
+                if($this->nameError($insertName) === true){
                     $errorMsgArr['name'][] = "名字应为英文类型";
                     $errorFlg = true;
                 }
