@@ -1,8 +1,7 @@
 <?php 
 session_start();
 header("Content-type:text/html;charset=utf-8");
-date_default_timezone_set('PRC');
-
+date_default_timezone_set('PRC'); 
 //-----set URL Params(url参数设置)-----
 $param = rtrim($_SERVER['REQUEST_URI'], '/');//获取当前脚本路径  
 $params = array();
@@ -30,12 +29,12 @@ if (0 < count($params)) {
 $className = $controller . 'Controller'; //控制器名字 
 $name = 'Controller/' . $className . '.php';//文件名字 
 //判断文件是否存在
-if(file_exists($name)){
+if(file_exists($name)){ 
     include 'Controller/' . $className . '.php';
     $controllerInstance = new $className();
     $controllerInstance->$action();
 }else{
-    echo "<h1> error </h1>";
+    echo "000";
 }
 
 

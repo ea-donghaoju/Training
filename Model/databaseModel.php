@@ -17,10 +17,9 @@ class databaseModel{
 
     //-----查询方法-----
 
-    function findData()
+    function findData($searchCondition,$name)
     {
-     // $sql = "select * from member where {$searchCondition} like '%{$name}%'";
-          $sql = "select member.*,department.department_name from member inner join department on member.Department_id=department.id where {$searchCondition} like '%{$name}%'"; 
+        $sql = "select member.*,department.department_name from member inner join department on member.Department_id=department.id where {$searchCondition} like '%{$name}%'"; 
         $result = $this -> execSQL($sql);
         return $result -> fetch_all();
     }
@@ -32,13 +31,13 @@ class databaseModel{
         return $result;
     } 
     //-----一览页面的查询方法-----
-    function select(){
+    function selectmember(){
         $sql = "select member.id,name,Brithday,department_name,status from member join department on member.Department_id=department.id";
         $result = $this -> execSQL($sql);
         return $result -> fetch_all();
     }
-    //-----一览页面的修改字段的方法-----
-    function up( $array= '' ){
+    //-----一览页面的软删除(修改)字段的方法-----
+    function ruanmember( $array){
         $sql = "update member set status = 0 where id in ".$array;
         $result = $this->execSQL($sql);
         return $result;
