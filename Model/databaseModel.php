@@ -31,13 +31,14 @@ class databaseModel{
         return $result;
     } 
     //-----一览页面的查询方法-----
-    function selectmember(){
+    function searchMembers(){
         $sql = "select member.id,name,Brithday,department_name,status from member join department on member.Department_id=department.id";
-        $result = $this -> execSQL($sql);
-        return $result -> fetch_all();
+        $members = $this -> execSQL($sql);
+        return $members -> fetch_all();
     }
     //-----一览页面的软删除(修改)字段的方法-----
-    function ruanmember( $array){
+    function delMembers( $array)
+    {
         $sql = "update member set status = 0 where id in ".$array;
         $result = $this->execSQL($sql);
         return $result;

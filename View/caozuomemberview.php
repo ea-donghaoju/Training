@@ -26,10 +26,10 @@
 		</thead>
 		<tbody style="text-align: center;">
 		<?php
-          if(!empty($result)){  
-            foreach($result as $key=>$v)
+          if(!empty($members)){
+            foreach($members as $key=>$v)
             {
-            	if($v[4] == 1){ 
+            	if($v[4] == 1){
                 echo "<tr>";
                 echo "<td class = 'id' id='id_01'>".$v[0]."</td>";
                 echo "<td>" . $v[1] . "</td>";//显示姓名

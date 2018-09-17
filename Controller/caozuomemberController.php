@@ -3,9 +3,9 @@ include('Model/databaseModel.php');
 class caozuomemberController
 {
 	//一览页面的展示
-    function index(){ 
+    function index(){
     	$databaseModel = new databaseModel();
-        $result = $databaseModel->selectmember(); 
+        $members = $databaseModel->searchMembers(); 
     	require("View/caozuomemberview.php");
     }
 }
