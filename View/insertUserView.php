@@ -8,12 +8,10 @@
 
 <h1>社員管理システム</h1>
 <div style="font-size: 16px;color: #000">
-    <!--    添加成功出现提示-->
     <?php
-    if($errorFlg === false){
-        //正确的提示
+    if ($errorFlg === false) {
         echo "OK" ;
-    }?>
+    } ?>
 </div>
         <form action="/dev/insertUser" method="post" name="insertData">
         <!--添加姓名的验证规则-->

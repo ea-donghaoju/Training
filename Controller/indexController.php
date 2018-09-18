@@ -1,8 +1,12 @@
 <?php
-
-class indexController
+class IndexController
 {
-    function index() {
+    /**
+     * 首页
+     * @return void
+     */
+    public function index()
+    {
         require('View/index.php');
     }
 }

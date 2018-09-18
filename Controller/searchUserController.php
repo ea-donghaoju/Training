@@ -1,68 +1,74 @@
 <?php
 include('Model/databaseModel.php');
-class searchUserController
+class SearchUserController
 {
-    function index()
+    /**
+     * 搜索页面
+     * @return void
+     */
+    public function index()
     {
         //保留上一次选择的条件值
         $_SESSION['searchCondition'] = isset($_POST['searchCondition'])?$_POST['searchCondition']:"";
         $cSession = isset($_SESSION['searchCondition'])?$_SESSION['searchCondition']:"";
 
-        //POST Validation
         //清除搜索内容左右两边的空格
         $searchName = '';
-        $errorMsgArr  = array();
+        $errorMsgArr = [];
 
 
-        if(isset($_POST['searchName'])){
+        if (isset($_POST['searchName'])) {
             $searchName = trim($_POST['searchName']);
         }
         $searchCondition = false;
-        if(isset($_POST['searchCondition'])){
+        if (isset($_POST['searchCondition'])) {
             $searchCondition = $this->checkPostCondition($_POST['searchCondition']);
-        }
-
-        if($searchCondition === false){
-            //Post error
         }
 
         //判断输入内容
         if (!empty($searchName)) {
-            if(preg_match('/^[\w\?\-]+$/',$searchName))
-            {
+            if (preg_match('/^[\w\?\-]+$/', $searchName)) {
                 $result = $this->search($searchName, $searchCondition);//给search()传值
-                if($result == null){
+                if ($result == null) {
                     $errorMsgArr[] = "未查询到";
                 }
-            }else{
+            } else {
                 $errorMsgArr[] = "输入类型为英文或数字";
             }
-        }else{
+        } else {
             $searchName = "";
-            $searchCondition= "name";
+            $searchCondition = "name";
             $errorMsgArr[] = "请输入内容";
-            $result = $this->search($searchName, $searchCondition);//给search()传值
+            $result = $this->search($searchName, $searchCondition);
         }
         require('View/Helper/formHelper.php');
         $formHelper = new formHelper();
         require('View/searchUserView.php');
     }
 
-        //-----验证搜索条件-----
-        //input Posted Search Condition
-        //output Validated Search Condition or Validate False
-    function checkPostCondition($postCondition)
+    /**
+     * 验证搜索条件
+     * @param string $postCondition 搜索条件
+     * @return boolin
+     */
+    public function checkPostCondition($postCondition)
     {
         if ($postCondition == 'Name'
             || $postCondition == 'Department'
             || $postCondition == 'Birthday') {
             return $postCondition;
         }
+
         return false;
     }
 
-        //-----查询数据-----
-    function search($name, $searchCondition)
+    /**
+     * 查询数据
+     * @param string $name 名字
+     * @param string $searchCondition 搜索条件
+     * @return bool
+     */
+    public function search($name, $searchCondition)
     {
         $databaseModel = new databaseModel();
         $searchResult = $databaseModel->findData($name, $searchCondition);
@@ -70,8 +76,7 @@ class searchUserController
         if ($searchResult) {
             return $searchResult;
         } else {
-            return false;;
+            return false;
         }
     }
 }
-//select
