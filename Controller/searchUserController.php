@@ -1,5 +1,5 @@
 <?php
-include('Model/databaseModel.php');
+include('Model/MembersModel.php');
 class SearchUserController
 {
     /**
@@ -68,10 +68,10 @@ class SearchUserController
      * @param string $searchCondition 搜索条件
      * @return bool
      */
-    public function search($name, $searchCondition)
+    public function search($searchCondition, $name)
     {
-        $databaseModel = new databaseModel();
-        $searchResult = $databaseModel->findData($name, $searchCondition);
+        $membersModel = new MembersModel();
+        $searchResult = $membersModel->findData($searchCondition, $name);
         //做判断$search有没有查到
         if ($searchResult) {
             return $searchResult;

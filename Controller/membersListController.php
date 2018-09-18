@@ -1,5 +1,5 @@
 <?php
-include('Model/databaseModel.php');
+include('Model/membersModel.php');
 class MembersListController
 {
     /**
@@ -8,7 +8,7 @@ class MembersListController
      */
     public function index()
     {
-        $databaseModel = new databaseModel();
+        $databaseModel = new membersModel();
         $members = $databaseModel->getmembersList();
         require("View/memberListView.php");
     }

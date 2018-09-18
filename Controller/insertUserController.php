@@ -1,5 +1,5 @@
 <?php
-include('Model/databaseModel.php');
+include('Model/MembersModel.php');
 date_default_timezone_set('PRC');
 
 class InsertUserController
@@ -42,7 +42,10 @@ class InsertUserController
             $errorMsgArr['birthday'][] = "请输入内容";
             $errorFlg = true;
         }
-        $department = $_POST['departmentCondition'];
+        if (!empty($_POST['departmentCondition']) ) {
+            $department = $_POST['departmentCondition'];
+        }
+        // $department = ;
         //如果没有存入错误标记(errorFlg)，则跳转到insertCheck页面中确认信息
         if ($errorFlg === false) {
             require('View/insertUserCheckView.php');
@@ -109,7 +112,6 @@ class InsertUserController
                 return true;
             }
         }
-
         return false;
     }
 
@@ -122,8 +124,8 @@ class InsertUserController
      */
     public function insert($name, $birthday, $department)
     {
-        $databaseModel = new databaseModel();
-        $insertResult = $databaseModel->insertData($name, $birthday, $department);
+        $membersModel = new MembersModel();
+        $insertResult = $membersModel->insertData($name, $birthday, $department);
         if ($insertResult == true) {
             return $insertResult;
         } else {
@@ -138,7 +140,7 @@ class InsertUserController
      * @param string $department 电话
      * @return boolin
      */
-    public function insertCheck($insertName, $insertBirthday, $department)
+    public function insertCheck($insertName = '', $insertBirthday = '', $department = '')
     {
         //如果通过审查元素修改了输入内容，再次判断
         $errorFlg = false;
