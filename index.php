@@ -11,7 +11,7 @@ if ('' != $param) {
 
 //set Controller and Action（设置控制器）
 $controller = "";
-if (count($params) < 0) {
+if (count($params) > 0) {
     if (isset($params[2])) {
         $controller = $params[2];
     } else {
