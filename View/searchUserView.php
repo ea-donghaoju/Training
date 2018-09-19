@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>社員管理システム</h1>
-<form action="/index.php/searchUser" method="post" name="searchData">
+<form action="/dev/searchUser" method="post" name="searchData">
     请输入：<input type="text" name="searchName" placeholder="请输入你的姓名" />&nbsp;&nbsp;
     选择条件：<select name="searchCondition">
             <option value="Name" <?php if($cSession=='Name'){ ?>selected="selected"<?php } ?>>名字</option>

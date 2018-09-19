@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>社員管理システム</h1>
-<form action="/index.php/insertUser/insertCheck" method="post">
+<form action="/dev/insertUser/insertCheck" method="post">
     <div style="width: 280px;" >
     <p>名前：<input type="text" name="insertName"  style="float: right" readonly="on"  value="<?php echo $_POST['insertName'] ?>"/></p>
     <p>诞生日：<input type="text" name="insertBirthday" style="float: right;" readonly="on" value="<?php echo $_POST['insertBirthday'] ?>"/></p>
