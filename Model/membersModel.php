@@ -13,7 +13,7 @@ class MembersModel extends DataBaseModel{
         return $members;
     }
 
-        /**
+    /**
      * 查询方法
      * @param string $searchCondition 搜索条件
      * @param string $name 名字
@@ -25,7 +25,7 @@ class MembersModel extends DataBaseModel{
         return $this->execSQL($sql);
     }
 
-        /**
+    /**
      * 添加方法
      * @param string $name 姓名
      * @param string $birthday 生日
