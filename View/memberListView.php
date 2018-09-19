@@ -24,7 +24,7 @@
                 echo "<tr>";
                 echo "<td class = 'id' id='id_01'>".$member['id']."</td>";
                 echo "<td>" . $member['name'] . "</td>";//显示姓名
-                echo "<td>" . $member['Brithday'] . "</td>";//显示生日
+                echo "<td>" . $member['Birthday'] . "</td>";//显示生日
                 echo "<td>" . $member['department_name'] . "</td>";//显示部门
                 echo "</tr>";
             }

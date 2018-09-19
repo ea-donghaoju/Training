@@ -1,5 +1,5 @@
 <?php
-include('Model/databaseModel.php');
+include('Model/MembersModel.php');
 class SearchUserController
 {
     /**
@@ -28,8 +28,8 @@ class SearchUserController
         //判断输入内容
         if (!empty($searchName)) {
             if (preg_match('/^[\w\?\-]+$/', $searchName)) {
-                $result = $this->search($searchName, $searchCondition);//给search()传值
-                if ($result == null) {
+                $result = $this->search($searchCondition, $searchName);//给search()传值
+                if ($result -> num_rows == 0) {
                     $errorMsgArr[] = "未查询到";
                 }
             } else {
@@ -39,7 +39,6 @@ class SearchUserController
             $searchName = "";
             $searchCondition = "name";
             $errorMsgArr[] = "请输入内容";
-            $result = $this->search($searchName, $searchCondition);
         }
         require('View/Helper/formHelper.php');
         $formHelper = new formHelper();
@@ -58,7 +57,6 @@ class SearchUserController
             || $postCondition == 'Birthday') {
             return $postCondition;
         }
-
         return false;
     }
 
@@ -68,10 +66,10 @@ class SearchUserController
      * @param string $searchCondition 搜索条件
      * @return bool
      */
-    public function search($name, $searchCondition)
+    public function search($searchCondition, $name)
     {
-        $databaseModel = new databaseModel();
-        $searchResult = $databaseModel->findData($name, $searchCondition);
+        $membersModel = new MembersModel();
+        $searchResult = $membersModel->findData($searchCondition, $name);
         //做判断$search有没有查到
         if ($searchResult) {
             return $searchResult;

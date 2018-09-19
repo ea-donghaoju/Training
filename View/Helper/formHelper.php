@@ -19,8 +19,4 @@ class formHelper
                     }
             echo '</div>';
         }
-
     }
-
-
-}
