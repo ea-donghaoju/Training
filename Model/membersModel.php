@@ -21,7 +21,7 @@ class MembersModel extends DataBaseModel{
      */
     public function findData($searchCondition, $name)
     {
-        $sql = "select member.*,department_name from member inner join department on member.Department_id=department.id where $searchCondition like '%{$name}%'";
+        $sql = "select member.*,department_name from member inner join department on member.Department_id=department.id where ". $searchCondition . " like '%" . $name . "%'";
         return $this->execSQL($sql);
     }
 
@@ -34,7 +34,7 @@ class MembersModel extends DataBaseModel{
      */
     public function insertData($name, $birthday, $department)
     {
-        $sql = "insert into member (Name,Birthday,Department_id) values ('{$name}','{$birthday}','{$department}')";
+        $sql = "insert into member (Name,Birthday,Department_id) values ('" . $name . "','" . $birthday . "','" . $department . "')";
         $result = $this->execSQL($sql);
         return $result;
     }

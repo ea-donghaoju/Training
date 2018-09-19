@@ -13,7 +13,7 @@
         echo "OK" ;
     } ?>
 </div>
-    <form action="/index.php/insertUser" method="post" name="insertData">
+    <form action="/dev/insertUser" method="post" name="insertData">
         <!--添加姓名的验证规则-->
         <div style="width: 280px;" >
         <p>名字：<input type="text" placeholder="请输入你的姓名" name="insertName" maxlength="11" style="float: right"/></p>
