@@ -48,9 +48,7 @@
             <input type="submit" value="提交"/>
 <!--<a href="insertUser/insertCheck">???</a>-->
         </div>
-
     </form>
-
     </div>
 </body>
 </html>
