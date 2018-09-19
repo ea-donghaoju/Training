@@ -20,3 +20,4 @@ class formHelper
             echo '</div>';
         }
     }
+}

@@ -8,7 +8,7 @@ class MembersListController
      */
     public function index()
     {
-        $databaseModel = new membersModel();
+        $databaseModel = new MembersModel();
         $members = $databaseModel->getmembersList();
         require("View/memberListView.php");
     }
