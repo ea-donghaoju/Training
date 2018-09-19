@@ -21,7 +21,7 @@ class MembersModel extends DataBaseModel{
      */
     public function findData($searchCondition, $name)
     {
-        $sql = "select member.*,department_name from member inner join department on member.Department_id=department.id where $name like '%{$searchCondition}%'";
+        $sql = "select member.*,department_name from member inner join department on member.Department_id=department.id where $searchCondition like '%{$name}%'";
         return $this->execSQL($sql);
     }
 
