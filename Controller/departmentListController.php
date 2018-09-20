@@ -8,8 +8,8 @@ class DepartmentListController
      */
     public function index()
     {
-        $databaseModel = new DepartmentModel();
-        $departments = $databaseModel->getdepartmentList();
+        $departmentModel = new DepartmentModel();
+        $departments = $departmentModel->getdepartmentList();
         require("View/departmentListView.php");
     }
 }

@@ -11,6 +11,11 @@
 <body>
   <form action="/dev/departmentInsert" method="post">
       <input type="text" name="department_name" placeholder="请输入职位名称" required>
+      <?php
+          if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $formHelper->displayError($errorMsgArray['department_name']);
+          }
+        ?>
       <input type="submit" id="sub">
   </form>
 </body>

@@ -8,7 +8,6 @@ $params = [];
 if ('' != $param) {
     $params = explode('/', $param);
 }
-
 //set Controller and Action（设置控制器）
 $controller = "";
 if (count($params) > 0) {

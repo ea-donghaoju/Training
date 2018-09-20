@@ -2,9 +2,14 @@
 <html>
 <head>
     <title>department一览页面</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
     <style type="text/css" media="screen">
         td{
             text-align: center;
+        }
+        a{
+            text-decoration: none;
+            color: black;
         }
         button{
             cursor: pointer;
@@ -20,6 +25,7 @@
             </tr>
         </thead>
         <tbody>
+             <td colspan="4"><button><a href="/dev/departmentInsert" class="btn">添加</a></button></td>
             <?php
                 foreach ($departments as $department) {
                     echo "<tr>";
@@ -28,13 +34,7 @@
                     echo "</tr>";
                 }
              ?>
-             <td colspan="3"><button onclick="tianjia()">添加</button></td>
         </tbody>
     </table>
 </body>
-<script>
-function tianjia() {
-    window.location.href='/dev/departmentInsert';
-}
-</script>
 </html>
