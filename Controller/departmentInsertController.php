@@ -1,6 +1,6 @@
 <?php
 include('Model/departmentModel.php');
-class DepartmentInsertController{
+class departmentInsertController{
     /**
      * 一览页添加功能
      * @return    void
@@ -14,22 +14,19 @@ class DepartmentInsertController{
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $departmentName = $_POST['department_name'];
             $_SESSION['departmentName'] = $departmentName;
-            $departmentModel = new DepartmentModel();
-            $departments = $departmentModel->getdepartmentList();
             if (!empty($departmentName)) {
                 #去除输入的空格
                 $departmentName = trim($departmentName);
                 #输入的职位内容是否为汉字,和长度不能大于50
-                if (!$this->CheckName($departmentName)) {
+                if (!$this->checkName($departmentName)) {
                     $errorMsgArray['department_name'][] = "输入的内容只可以为汉字,字符长度不可以大于50";
                     $errorFlag = true;
                 }
-                foreach($departments as $department){
-                   $exitName[] = $department['department_name'];
-                }
-                if (in_array($departmentName,$exitName)) {
-                    $errorMsgArray['department_name'][] = "此职位名称已经存在,请重新输入";
-                    $errorFlag = true;
+                $departmentModel = new DepartmentModel();
+                $department = $departmentModel->getDepartmentByNeme($departmentName);
+                if ($department->num_rows != 0) {
+                        $errorMsgArray['department_name'][] = "该用职位名已经存在，请重新输入";
+                        $errorFlag = true;
                 }
             } else {
                 $errorFlag['department_name'][] = "输入的内容不可以为空";
@@ -42,7 +39,6 @@ class DepartmentInsertController{
                 $formHelper = new formHelper();
                 require('View/departmentInsertView.php');
             }
-
         } else {
             require("View/departmentInsertView.php");
         }
@@ -53,7 +49,7 @@ class DepartmentInsertController{
      * @param string 输入的内容
      * @param    bool true 或 false
      */
-    public function CheckName($insertname)
+    public function checkName($insertname)
     {
         if (preg_match('/^[\x80-\xff]{1,50}$/',$insertname)) {
             return true;
@@ -66,16 +62,15 @@ class DepartmentInsertController{
      * 确认是否插入这些数据
      * @return void
      */
-    public function CheckInsertDepartment()
+    public function confirm()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $departmentName = $_POST['department_name'];
-            #去除用户名两端的空格
-            if (!empty($departmentName))  $departmentName = trim($departmentName);
             $departmentModel = new DepartmentModel();
-            $departResult = $departmentModel -> InsertDepartmentByName($departmentName);
+            $departResult = $departmentModel -> insertDepartmentByName($departmentName);
                 if ($departResult) {
-                    require("View/departmentSuccessView.php");
+                    $hostName = $_SERVER['HTTP_HOST'].'/dev/departmentList';
+                    Header("Location: http://$hostName");
                 } else {
                     echo "<p style='color : red'>"."数据添加有误,请重新添加"."</p>";
                     require("View/departmentInsertView.php");

@@ -12,11 +12,21 @@ class DepartmentModel extends DataBaseModel{
     }
 
     /**
+     * @param    $name string 用户插入的职位名称
+     * @return   array
+     */
+    public function getDepartmentByNeme($name)
+    {
+        $sql = "select * from department where department_name = '".$name."'";
+        return $this->execSQL($sql);
+    }
+
+    /**
      * 插入数据
      * @param string $name 职位名称
      * @return void
      */
-    public function InsertDepartmentByName($name)
+    public function insertDepartmentByName($name)
     {
         $sql = "insert into `department`(`department_name`) values('" . $name . "')";
         return $this->execSQL($sql);

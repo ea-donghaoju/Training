@@ -1,6 +1,6 @@
 <?php
 include('Model/departmentModel.php');
-class DepartmentListController
+class departmentListController
 {
     /**
      * department一览页面
