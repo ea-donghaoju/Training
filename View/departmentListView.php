@@ -22,6 +22,7 @@
             <tr>
                 <th>职位编号</th>
                 <th>职位名称</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -31,6 +32,7 @@
                     echo "<tr>";
                     echo "<td>" . $department['id'] . "</td>";
                     echo "<td>" . $department['department_name'] . "</td>";
+                    echo "<td>" . "<button><a href=" . '/dev/departmentupdated/index?id=' . "" . $department['id'] . ">编辑</a></button>". "</td>";
                     echo "</tr>";
                 }
              ?>

@@ -23,7 +23,7 @@ class departmentInsertController{
                     $errorFlag = true;
                 }
                 $departmentModel = new DepartmentModel();
-                $department = $departmentModel->getDepartmentByNeme($departmentName);
+                $department = $departmentModel->getDepartmentByName($departmentName);
                 if ($department->num_rows != 0) {
                         $errorMsgArray['department_name'][] = "该用职位名已经存在，请重新输入";
                         $errorFlag = true;

@@ -3,7 +3,7 @@ include('Model/databaseModel.php');
 class DepartmentModel extends DataBaseModel{
     /**
      * 获取department表单所以得内容
-     * @return array
+     * @return object
      */
     public function getDepartmentList()
     {
@@ -13,11 +13,32 @@ class DepartmentModel extends DataBaseModel{
 
     /**
      * @param    $name string 用户插入的职位名称
-     * @return   array
+     * @return   object
      */
-    public function getDepartmentByNeme($name)
+    public function getDepartmentByName($name)
     {
         $sql = "select * from department where department_name = '".$name."'";
+        return $this->execSQL($sql);
+    }
+
+    /**
+     * @param   $id 职务对应的id
+     * @return  object
+     */
+    public function getDepartmentById($id)
+    {
+        $sql = "select * from department where id = " . $id . "";
+        return $this->execSQL($sql)->fetch_assoc();
+    }
+
+    /**
+     * @param    $id 要更改的职位id
+     * @param    $departmentName 用户要更改的职位名称
+     * @return        [type]                 [description]
+     */
+    public function updateDepartmentById($id,$departmentName)
+    {
+        $sql = "update department set department_name = '" . $departmentName . "' where id = " . $id ."";
         return $this->execSQL($sql);
     }
 

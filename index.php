@@ -17,12 +17,15 @@ if (count($params) > 0) {
         $controller = "index";
     }
     if (isset($params[3])) {
-        $action = $params[3];
+        if (strpos($params[3],'?')) {
+            $action = substr($params[3],0,strpos($params[3],'?'));
+        } else {
+            $action = $params[3];
+        }
     } else {
         $action = 'index';
     }
 }
-
 //控制器名字
 $className = $controller . 'Controller';
 //文件名字
