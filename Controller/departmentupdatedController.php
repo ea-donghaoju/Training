@@ -27,13 +27,18 @@ class departmentupdatedController extends departmentInsertController{
             }
             if ($errorFlag == false) {
                 #如果更改的数据没有错误，那么就连接数据库更改数据信息
-                $updateResult = $departmentModel->updateDepartmentById($id,$departmentName);
-                if ($updateResult) {
-                    $hostName = $_SERVER['HTTP_HOST'].'/dev/departmentList';
-                    Header("Location: http://$hostName");
-                } else {
-                    echo "<p style='color : red'>"."数据更改失败,请检查逻辑代码啦啦"."</p>";
-                }
+                try {
+                    $updateResult = $departmentModel->updateDepartmentById($id,$departmentName);
+                    if ($updateResult) {
+                        $hostName = $_SERVER['HTTP_HOST'].'/dev/departmentList';
+                        Header("Location: http://$hostName");
+                    } else {
+                        throw new Exception("数据更改失败,请重新操作");
+                    }
+                    } catch (Exception $e) {
+                        echo $e->getMessage();
+                    }
+
             } else {
                 require('View/Helper/formHelper.php');
                 $formHelper = new formHelper();

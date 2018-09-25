@@ -32,6 +32,7 @@ class DepartmentModel extends DataBaseModel{
     }
 
     /**
+     * 根据提供的参数修改数据信息
      * @param    $id 要更改的职位id
      * @param    $departmentName 用户要更改的职位名称
      * @return        [type]                 [description]
