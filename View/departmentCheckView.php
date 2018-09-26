@@ -5,6 +5,8 @@
     <style type="text/css" media="screen">
         .sub{
             cursor: pointer;
+            float: left;
+            margin-right: 5px;
         }
         a{
           text-decoration: none;
@@ -14,7 +16,7 @@
 </head>
 <body>
   <form action="/dev/DepartmentInsert/confirm" method="post">
-      <input type="text" name="department_name" value="<?php echo $_POST['department_name']?>" readonly="readonly">
+    <p name"department_name" >要添加的内容为：<?php echo $_SESSION['departmentName'] ?></p>
       <input type="submit" value="确认" class="sub">
   </form>
   <button><a href="javaScript:history.go(-1)">返回上一页</a></button>
