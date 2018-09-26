@@ -65,9 +65,8 @@ class departmentInsertController{
             }
             return $errorMsgArray;
         }
-                $errorMsgArray['department_name'][] = "输入的内容不可以为空";
-
-            return $errorMsgArray;
+        $errorMsgArray['department_name'][] = "输入的内容不可以为空";
+        return $errorMsgArray;
     }
 
     /**
