@@ -16,7 +16,6 @@ class SearchUserController
         $searchName = '';
         $errorMsgArr = [];
 
-
         if (isset($_POST['searchName'])) {
             $searchName = trim($_POST['searchName']);
         }
