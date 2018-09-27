@@ -28,9 +28,9 @@ class departmentUpdatedController
                 return;
             }
 
-        //数据获取成功,将数据显示在对于的departmentupdateView视图
-        require("View/departmentupdateView.php");
-        return;
+            //数据获取成功,将数据显示在对于的departmentupdateView视图
+            require("View/departmentupdateView.php");
+            return;
         }
 
         $id = $_POST['id'];
@@ -51,6 +51,5 @@ class departmentUpdatedController
         }
         $hostName = $_SERVER['HTTP_HOST'].'/dev/departmentList';
         Header("Location: http://".$hostName);
-
     }
 }
