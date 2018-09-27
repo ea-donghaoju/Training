@@ -44,7 +44,6 @@ class departmentInsertController{
     /**
      * 将post提交的数据保存到session里
      * @param string 插入数据post提交的数据
-     * @param         [type] $name [description]
      */
     private function setInsertDepartmentName($name)
     {
@@ -57,7 +56,7 @@ class departmentInsertController{
      * @param    $departmentName string post接受的用户名
      * @return array
      */
-    private function confirmName($departmentName)
+    public function confirmName($departmentName)
     {
         $errorMsgArray['department_name'] = [];
 
