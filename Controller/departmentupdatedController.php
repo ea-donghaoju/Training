@@ -32,7 +32,11 @@ class departmentupdatedController extends departmentInsertController{
         }
 
         //如果更改的数据没有错误，那么就连接数据库更改数据信息
-        $this->editDepartmentByIdName($id, $departmentName);
+        try {
+            $this->editDepartmentByIdName($id, $departmentName);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            }
 
     }
 
@@ -44,17 +48,14 @@ class departmentupdatedController extends departmentInsertController{
      */
     public function editDepartmentByIdName($id, $departmentName)
     {
-        try {
             $updateResult = $this->departmentModel->updateDepartmentById($id,$departmentName);
             if ($updateResult) {
                 $hostName = $_SERVER['HTTP_HOST'].'/dev/departmentList';
                 Header("Location: http://$hostName");
             } else {
                 throw new Exception("数据更改失败,请重新操作,请检查id");
-                }
-            } catch (Exception $e) {
-                echo $e->getMessage();
             }
+
             return;
     }
 
