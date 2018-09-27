@@ -1,6 +1,7 @@
 <?php
 include('Model/departmentModel.php');
-class departmentInsertController{
+class departmentInsertController
+{
     //声明一个变量,存储实例化对象
     public $departmentModel = null;
     /**
@@ -27,12 +28,10 @@ class departmentInsertController{
         //检查post提交的Name
         $insertName = $_POST['department_name'];
         $this->setInsertDepartmentName($insertName);
-        $errorMsgArray = $this->confirmName($insertName);
+        $errorMsgArray = $this->departmentModel->confirmName($insertName);
 
         //有错误信息时返回到Department添加页面
         if ($errorMsgArray['department_name'] != null) {
-            require('View/Helper/formHelper.php');
-            $formHelper = new formHelper();
             require('View/departmentInsertView.php');
             return;
         }
@@ -49,53 +48,6 @@ class departmentInsertController{
     {
         $_SESSION['insertDepartmentName'] = $name;
         return;
-    }
-
-    /**
-     * 对于接受的参数是否正确，
-     * @param    $departmentName string post接受的用户名
-     * @return array
-     */
-    public function confirmName($departmentName)
-    {
-        $errorMsgArray['department_name'] = [];
-
-        //判断是否为空，如果是空，直接返回错误$errorMsgArray信息
-        if (empty($departmentName)) {
-            $errorMsgArray['department_name'][] = "输入的内容不可以为空";
-            return $errorMsgArray;
-        }
-
-        //去除输入的空格
-        $departmentName = trim($departmentName);
-
-        //输入的职位内容是否为汉字,和长度不能大于50
-        if (!$this->checkName($departmentName)) {
-            $errorMsgArray['department_name'][] = "输入的内容只可以为汉字,字符长度不可以大于50";
-        }
-
-        //判断数据库中是否有相同的数据信息
-        $department = $this->departmentModel->getDepartmentByName($departmentName);
-        if ($department->num_rows != 0) {
-            $errorMsgArray['department_name'][] = "该职位名已经存在，请重新输入";
-        }
-
-        //返回错误信息，或者为空
-        return $errorMsgArray;
-    }
-
-    /**
-     * 检查输入的内容是汉字,长度不能大于50
-     * @param string 输入的内容
-     * @param    bool true 或 false
-     */
-    private function checkName($insertname)
-    {
-        if (preg_match('/^[\x80-\xff]{1,50}$/',$insertname)) {
-            return true;
-        }
-
-        return false;
     }
 
     /**
