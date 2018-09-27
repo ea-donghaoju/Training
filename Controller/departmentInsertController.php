@@ -105,6 +105,7 @@ class departmentInsertController{
      */
     public function confirm()
     {
+        //判断提交方式如果不是post ,加载departmentInsertView页面
         if ($_SERVER['REQUEST_METHOD'] != 'POST') {
             require("View/departmentInsertView.php");
             return;
@@ -117,8 +118,9 @@ class departmentInsertController{
             require("View/departmentInsertView.php");
             return;
         }
+
         $hostName = $_SERVER['HTTP_HOST'].'/dev/departmentList';
-        Header("Location: http://" . $hostName );
+        Header("Location: http://" . $hostName);
     }
 
     /**
