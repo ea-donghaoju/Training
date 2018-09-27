@@ -7,18 +7,20 @@ class departmentupdatedController extends departmentInsertController{
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $id = $_GET['id'];
             $getDepartment = $this->departmentModel->getDepartmentById($id);
+
             //如果数据获取失败，显示错误信息
             if (!$getDepartment) {
                 echo "<p style='color : red'>"."数据查询失败，请检查逻辑代码"."</p>";
                 return;
             }
-        //数据获取成功,添加到
+
+        //数据获取成功,将数据显示在对于的departmentupdateView视图
         require("View/departmentupdateView.php");
         return;
         }
 
-        $departmentName = $_POST['department_name'];
         $id = $_POST['id'];
+        $departmentName = $_POST['department_name'];
         $errorMsgArray = $this->confirmName($departmentName);
 
         //判断错误信息是否为空，为空则加载departmentupdateView，显示错误信息
@@ -30,8 +32,20 @@ class departmentupdatedController extends departmentInsertController{
         }
 
         //如果更改的数据没有错误，那么就连接数据库更改数据信息
+        $this->editDepartmentByIdName($id, $departmentName);
+
+    }
+
+    /**
+     * 数据都正常的时候，修改数据
+     * @param    $id 职务id
+     * @param    $departmentName string
+     * @return   void
+     */
+    public function editDepartmentByIdName($id, $departmentName)
+    {
         try {
-            $updateResult = $this->departmentModel->updateDepartmentById($_SESSION['editId'],$departmentName);
+            $updateResult = $this->departmentModel->updateDepartmentById($id,$departmentName);
             if ($updateResult) {
                 $hostName = $_SERVER['HTTP_HOST'].'/dev/departmentList';
                 Header("Location: http://$hostName");
@@ -41,5 +55,7 @@ class departmentupdatedController extends departmentInsertController{
             } catch (Exception $e) {
                 echo $e->getMessage();
             }
+            return;
     }
+
 }
