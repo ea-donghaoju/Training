@@ -14,7 +14,7 @@
     <?php  if (isset($message)) : ?>
       <p style="color: red"><?php echo $message;?></p>
     <?php endif;?>
-  <form action="/dev/departmentupdated" method="post">
+  <form action="/dev/departmentUpdated" method="post">
       <input type="text" name="department_name" value="<?php if ($_SERVER['REQUEST_METHOD'] == 'GET') echo $getDepartment['department_name'] ?>"  required>
       <input type="hidden" name="id" value="<?php if ($_SERVER['REQUEST_METHOD'] == 'GET') echo $getDepartment['id'] ?>">
       <?php

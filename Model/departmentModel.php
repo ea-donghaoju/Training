@@ -32,6 +32,17 @@ class DepartmentModel extends DataBaseModel{
     }
 
     /**
+     * @param string 参数
+     * @param    $id 职务id
+     * @return   object
+     */
+    public function delDepartmentById($id)
+    {
+        $sql = "delete from department where id = " . $id;
+        return $this->execSQL($sql);
+    }
+
+    /**
      * 根据提供的参数修改数据信息
      * @param    $id 要更改的职位id
      * @param    $departmentName 用户要更改的职位名称
