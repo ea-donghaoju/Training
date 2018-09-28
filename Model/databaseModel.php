@@ -15,6 +15,10 @@ class DataBaseModel{
             //链接数据库
             $mysqli = new mysqli($this->host, $this->user, $this->pwd, $this->dbName);
             $result = $mysqli->query($sql);
+            if (!$result) {
+                throw new Exception("数据库操作失败");
+            }
+
             return $result;
     }
 }
