@@ -24,12 +24,12 @@ class departmentUpdatedController
             //如果数据获取失败，显示错误信息
             if (!$getDepartment) {
                 $message = "查询失败，请重新操作";
-                require("View/departmentupdateView.php");
+                require("View/departmentUpdateView.php");
                 return;
             }
 
             //数据获取成功,将数据显示在对于的departmentupdateView视图
-            require("View/departmentupdateView.php");
+            require("View/departmentUpdateView.php");
             return;
         }
 
@@ -39,7 +39,7 @@ class departmentUpdatedController
 
         //判断错误信息是否为空，为空则加载departmentupdateView，显示错误信息
         if ($errorMsgArray['department_name'] != null) {
-            require("View/departmentupdateView.php");
+            require("View/departmentUpdateView.php");
             return;
         }
 
