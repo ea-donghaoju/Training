@@ -36,18 +36,19 @@ class departmentDelController
     public function confirmDel()
     {
         $id = $_SESSION['id'];
+        unset($_SESSION['id']);
 
         //根据id去更改delflag字段状态
-        $this->isNumId($id);
         try {
             $this->isNumId($id);
             $delResult = $this->departmentModel->delDepartmentById($id);
-            unset($_SESSION['id']);
         } catch(Exception $e) {
             echo $e->getMessage();
         }
 
+        $departmentName = $_SESSION['department_name'];
         require("View/departmentDelCompleteView.php");
+        unset($departmentName);
     }
 
     /**

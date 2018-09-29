@@ -1,13 +1,16 @@
 <?php
 include('Model/databaseModel.php');
 class DepartmentModel extends DataBaseModel{
+
+    const DELFLAG_TRUE = 0;
+    const DELFLAG_FALSE = 1;
     /**
      * 获取department表单所以得内容
      * @return object
      */
     public function getDepartmentList()
     {
-        $sql = "select * from department where delflag = 1";
+        $sql = "select * from department where delflag = " . self::DELFLAG_FALSE;
         return $this->execSQL($sql);
     }
 
@@ -38,7 +41,7 @@ class DepartmentModel extends DataBaseModel{
      */
     public function delDepartmentById($id)
     {
-        $sql = "update department set delflag = 0 where id = " . $id;
+        $sql = "update department set delflag = " .self::DELFLAG_TRUE ." where id = " . $id;
         return $this->execSQL($sql);
     }
 
