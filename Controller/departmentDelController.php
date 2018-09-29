@@ -16,31 +16,53 @@ class departmentDelController
 
     public function index()
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $id = $_GET['id'];
-            $_SESSION['id'] = $id;
-            //根据id去获取所有的数据
-            try {
-                $departmentData = $this->departmentModel->getDepartmentById($id);
-            } catch(Exception $e) {
-                echo $e->getMessage();
-            }
-            $_SESSION['department_name'] = $departmentData['department_name'];
-            require("View/departmentDelView.php");
+        $id = $_GET['id'];
+        $_SESSION['id'] = $id;
+        //根据id去获取所有的数据
+        try {
+            $this->isNumId($id);
+            $departmentData = $this->departmentModel->getDepartmentById($id);
+        } catch(Exception $e) {
+            echo $e->getMessage();
         }
+        $_SESSION['department_name'] = $departmentData['department_name'];
+        require("View/departmentDelConfirmView.php");
     }
 
-    // 根据获取的ID确认是否删除对应的职位信息
+    /**
+     * 根据获取的ID确认是否删除对应的职位信息
+     * @return    void
+     */
     public function confirmDel()
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'GET'){
-            try {
-                $delResult = $this->departmentModel->delDepartmentById($_SESSION['id']);
-            } catch(Exception $e) {
-                echo $e->getMessage();
-            }
+        $id = $_SESSION['id'];
+
+        //根据id去更改delflag字段状态
+        $this->isNumId($id);
+        try {
+            $this->isNumId($id);
+            $delResult = $this->departmentModel->delDepartmentById($id);
+            unset($_SESSION['id']);
+        } catch(Exception $e) {
+            echo $e->getMessage();
         }
 
-        require("View/departmentDelconfirmView.php");
+        require("View/departmentDelCompleteView.php");
+    }
+
+    /**
+     * 判断ID值是否为数字，否则终止执行
+     * @param    $id  $get传递过来的数字
+     * @return        boolean     [description]
+     */
+    private function isNumId($id)
+    {
+        if (!is_numeric($id)) {
+            throw new Exception("ID值应该为数字");
+            return;
         }
+
+        return true;
+    }
+
 }

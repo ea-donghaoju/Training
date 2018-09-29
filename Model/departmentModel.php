@@ -7,7 +7,7 @@ class DepartmentModel extends DataBaseModel{
      */
     public function getDepartmentList()
     {
-        $sql = "select * from department";
+        $sql = "select * from department where delflag = 1";
         return $this->execSQL($sql);
     }
 
@@ -38,7 +38,8 @@ class DepartmentModel extends DataBaseModel{
      */
     public function delDepartmentById($id)
     {
-        $sql = "delete from department where id = " . $id;
+        $sql = "update department set delflag = 0 where id = " . $id;
+        var_dump($sql);
         return $this->execSQL($sql);
     }
 
@@ -48,7 +49,7 @@ class DepartmentModel extends DataBaseModel{
      * @param    $departmentName 用户要更改的职位名称
      * @return        [type]                 [description]
      */
-    public function updateDepartmentById($id,$departmentName)
+    public function updateDepartmentById($id, $departmentName)
     {
         $sql = "update department set department_name = '" . $departmentName . "' where id = " . $id ."";
         return $this->execSQL($sql);

@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>显示已删除信息</title>
+    <title>是否删除这个职位</title>
+    <style type="text/css" media="screen">
+        #sub{
+            cursor: pointer;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+    </style>
 </head>
 <body>
-    <h5>显示已删除信息</h5>
-    <p>已经删除职务为：<?php echo $_SESSION['department_name'];?></p>
-    <button><a href="/dev/departmentList" style="text-decoration: none; color: black;">确认</a></button>
+    <form action="/dev/departmentDel/confirmDel" method="get">
+        <p>
+        是否删除职位：<?php echo $_SESSION['department_name']?>
+        </p>
+        <input type="submit" value="确认" id = "sub" style="float: left; margin-right: 6px;">
+    </form>
+    <button style="float: left;"><a href="/dev/departmentList">返回</a></button>
 </body>
 </html>
