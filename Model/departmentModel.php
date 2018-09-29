@@ -39,7 +39,6 @@ class DepartmentModel extends DataBaseModel{
     public function delDepartmentById($id)
     {
         $sql = "update department set delflag = 0 where id = " . $id;
-        var_dump($sql);
         return $this->execSQL($sql);
     }
 
