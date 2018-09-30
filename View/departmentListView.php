@@ -32,7 +32,7 @@
                 foreach ($departments as $department) {
                     echo "<tr>";
                     echo "<td>" . $department['id'] . "</td>";
-                    echo "<td>" . $department['department_name'] . "</td>";
+                    echo "<td>" . htmlspecialchars($department['department_name']) . "</td>";
                     echo "<td>" . "<button><a href=" . '/dev/departmentUpdated/index?id=' . "" . $department['id'] . ">编辑</a></button>" ."<button><a href=" . '/dev/departmentDel/index?id=' . "" . $department['id'] . ">删除</a></button>". "</td>";
                     echo "</tr>";
                 }

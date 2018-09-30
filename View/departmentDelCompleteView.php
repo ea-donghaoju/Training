@@ -5,7 +5,7 @@
 </head>
 <body>
     <h5>显示已删除信息</h5>
-    <p>已经删除职务为：<?php echo $departmentName;?></p>
+    <p>已经删除职务为：<?php echo htmlspecialchars($departmentName);?></p>
     <button><a href="/dev/departmentList" style="text-decoration: none; color: black;">确认</a></button>
 </body>
 </html>

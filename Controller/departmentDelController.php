@@ -12,20 +12,30 @@ class departmentDelController
     public function __construct()
     {
         $this->departmentModel = new DepartmentModel();
+
+        $this->getDepartmentId = $_GET['id'];
+
+        $this->sessionDepartmentId = $_SESSION['id'];
+        unset($_SESSION['id']);
+
+        $this->sessionDepartmentName = $_SESSION['department_name'];
+        unset($_SESSION['department_name']);
     }
 
     public function index()
     {
-        $delId = $_GET['id'];
-        $_SESSION['id'] = $delId;
+        $delId = $this->getDepartmentId;
+
         //根据id去获取所有的数据
         try {
             $this->isNumId($delId);
             $departmentData = $this->departmentModel->getDepartmentById($delId);
         } catch(Exception $e) {
-            echo $e->getMessage();
+            echo htmlspecialchars($e->getMessage());
         }
         $_SESSION['department_name'] = $departmentData['department_name'];
+        $_SESSION['id'] = $delId;
+
         require("View/departmentDelConfirmView.php");
     }
 
@@ -35,20 +45,18 @@ class departmentDelController
      */
     public function confirmDel()
     {
-        $delId = $_SESSION['id'];
-        unset($_SESSION['id']);
+        $delId = $this->sessionDepartmentId;
 
         //根据id去更改delflag字段状态
         try {
             $this->isNumId($delId);
             $this->departmentModel->delDepartmentById($delId);
         } catch(Exception $e) {
-            echo $e->getMessage();
+            echo htmlspecialchars($e->getMessage());
         }
 
-        $departmentName = $_SESSION['department_name'];
+        $departmentName = $this->sessionDepartmentName;
         require("View/departmentDelCompleteView.php");
-        unset($departmentName);
     }
 
     /**

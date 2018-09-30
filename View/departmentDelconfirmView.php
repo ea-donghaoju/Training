@@ -15,7 +15,7 @@
 <body>
     <form action="/dev/departmentDel/confirmDel" method="get">
         <p>
-        是否删除职位：<?php echo $departmentData['department_name']?>
+        是否删除职位：<?php echo htmlspecialchars($departmentData['department_name']);?>
         </p>
         <input type="submit" value="确认" id = "sub" style="float: left; margin-right: 6px;">
     </form>
