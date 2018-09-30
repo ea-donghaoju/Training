@@ -13,13 +13,18 @@ class departmentDelController
     {
         $this->departmentModel = new DepartmentModel();
 
-        $this->getDepartmentId = $_GET['id'];
+        if (isset($_GET['id']))
+            $this->getDepartmentId = $_GET['id'];
 
-        $this->sessionDepartmentId = $_SESSION['id'];
-        unset($_SESSION['id']);
+        if (isset($_SESSION['id'])) {
+            $this->sessionDepartmentId = $_SESSION['id'];
+            unset($_SESSION['id']);
+        }
 
-        $this->sessionDepartmentName = $_SESSION['department_name'];
-        unset($_SESSION['department_name']);
+        if (isset($_SESSION['department_name'])) {
+            $this->sessionDepartmentName = $_SESSION['department_name'];
+            unset($_SESSION['department_name']);
+        }
     }
 
     public function index()
