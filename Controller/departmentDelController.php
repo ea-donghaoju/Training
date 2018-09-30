@@ -40,7 +40,7 @@ class departmentDelController
 
         //根据id去更改delflag字段状态
         try {
-            $this->isNumId($id);
+            $this->isNumId($delId);
             $this->departmentModel->delDepartmentById($delId);
         } catch(Exception $e) {
             echo $e->getMessage();
@@ -56,7 +56,7 @@ class departmentDelController
      * @param    $id  $get传递过来的数字
      * @return        boolean     [description]
      */
-    private function isNumId($delid)
+    private function isNumId($delId)
     {
         if (!is_numeric($delId)) {
             throw new Exception("ID值应该为数字");
