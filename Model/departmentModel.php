@@ -39,9 +39,9 @@ class DepartmentModel extends DataBaseModel{
      * @param    $id 职务id
      * @return   object
      */
-    public function delDepartmentById($id)
+    public function delDepartmentById($delid)
     {
-        $sql = "update department set delflag = " .self::DELFLAG_TRUE ." where id = " . $id;
+        $sql = "update department set delflag = " .self::DELFLAG_TRUE ." where id = " . $delid;
         return $this->execSQL($sql);
     }
 

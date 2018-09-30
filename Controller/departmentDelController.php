@@ -16,12 +16,12 @@ class departmentDelController
 
     public function index()
     {
-        $id = $_GET['id'];
-        $_SESSION['id'] = $id;
+        $delId = $_GET['id'];
+        $_SESSION['id'] = $delId;
         //根据id去获取所有的数据
         try {
-            $this->isNumId($id);
-            $departmentData = $this->departmentModel->getDepartmentById($id);
+            $this->isNumId($delId);
+            $departmentData = $this->departmentModel->getDepartmentById($delId);
         } catch(Exception $e) {
             echo $e->getMessage();
         }
@@ -35,13 +35,13 @@ class departmentDelController
      */
     public function confirmDel()
     {
-        $id = $_SESSION['id'];
+        $delId = $_SESSION['id'];
         unset($_SESSION['id']);
 
         //根据id去更改delflag字段状态
         try {
             $this->isNumId($id);
-            $delResult = $this->departmentModel->delDepartmentById($id);
+            $this->departmentModel->delDepartmentById($delId);
         } catch(Exception $e) {
             echo $e->getMessage();
         }
@@ -56,9 +56,9 @@ class departmentDelController
      * @param    $id  $get传递过来的数字
      * @return        boolean     [description]
      */
-    private function isNumId($id)
+    private function isNumId($delid)
     {
-        if (!is_numeric($id)) {
+        if (!is_numeric($delId)) {
             throw new Exception("ID值应该为数字");
             return;
         }
