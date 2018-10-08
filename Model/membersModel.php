@@ -1,6 +1,9 @@
 <?php
 include('Model/databaseModel.php');
 class MembersModel extends DataBaseModel{
+    //声名一个常量，用常量替代数字，一眼就可以明白其含义
+    const STATUS_TRUE = 1;
+
     /**
      * @Author muzi
      * @param string参数
@@ -8,7 +11,7 @@ class MembersModel extends DataBaseModel{
      */
     public function getMembersList()
     {
-        $sql = "select member.id,name,Birthday,department_name,status from member join department where member.Department_id=department.id and status = 1";
+        $sql = "select member.id,name,Birthday,department_name,status from member join department where member.Department_id=department.id and status = " . self::STATUS_TRUE;
         $members = $this->execSQL($sql);
         return $members;
     }
