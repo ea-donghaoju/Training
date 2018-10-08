@@ -26,13 +26,13 @@ class SearchUserController
 
         //判断输入内容
         if (!empty($searchName)) {
-            if (preg_match('/^[\w\?\-]+$/', $searchName)) {
+            if (preg_match('/^[\x80-\xff_a-zA-Z0-9]+$/', $searchName)) {
                 $result = $this->search($searchCondition, $searchName);//给search()传值
                 if ($result -> num_rows == 0) {
                     $errorMsgArr[] = "未查询到";
                 }
             } else {
-                $errorMsgArr[] = "输入类型为英文或数字";
+                $errorMsgArr[] = "请输入中文、英文或者数字";
             }
         } else {
             $searchName = "";
@@ -52,8 +52,9 @@ class SearchUserController
     public function checkPostCondition($postCondition)
     {
         if ($postCondition == 'Name'
-            || $postCondition == 'Department'
-            || $postCondition == 'Birthday') {
+            || $postCondition == 'department_name'
+            || $postCondition == 'Birthday'
+            || $postCondition == 'position_name') {
             return $postCondition;
         }
         return false;
@@ -69,6 +70,7 @@ class SearchUserController
     {
         $membersModel = new MembersModel();
         $searchResult = $membersModel->findData($searchCondition, $name);
+
         //做判断$search有没有查到
         if ($searchResult) {
             return $searchResult;

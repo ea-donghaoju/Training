@@ -11,6 +11,8 @@
     选择条件：<select name="searchCondition">
             <option value="Name" <?php if($cSession=='Name'){ ?>selected="selected"<?php } ?>>名字</option>
             <option value="Birthday" <?php if($cSession=='Birthday'){ ?>selected="selected"<?php } ?>>诞生日</option>
+            <option value="department_name" <?php if($cSession=='department_name'){ ?>selected="selected"<?php } ?>>所属部门</option>
+            <option value="position_name" <?php if($cSession=='position_name'){ ?>selected="selected"<?php } ?>>职位</option>
           </select>&nbsp;&nbsp;
     <input type="submit" value="Search"/>
 </form><br/>
@@ -34,7 +36,7 @@
                 echo "<td>" . $formHelper->h($v['Name']) . "</td>";
                 echo "<td>" . $formHelper->h($v['Birthday']) . "</td>";
                 echo "<td>" . $formHelper->h($v['department_name']) . "</td>";
-                echo "<td>"."</td>";
+                echo "<td>" . $formHelper->h($v['position_name']). "</td>";
                 echo "</tr>";
             }
         }
