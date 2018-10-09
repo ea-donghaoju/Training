@@ -17,21 +17,22 @@ class SearchUserController
     {
         if ($_SERVER['REQUEST_METHOD'] != 'POST') {
             require('View/searchUserView.php');
+            return;
         }
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $searchCondition = $_POST['searchCondition'];
-            $searchName = trim($_POST['searchName']);
+        //获取post提交的数据
+        $searchCondition = $_POST['searchCondition'];
+        $searchName = trim($_POST['searchName']);
 
-            //根据condition查询条件验证查询内容，$memberData是返回的错误信息
-            $resultData = $this->membersModel->validateMembers($searchCondition, $searchName);
+        //根据condition查询条件验证查询内容，$memberData是返回的错误信息
+        $resultData = $this->membersModel->validateMembers($searchCondition, $searchName);
 
-            // 如果没有错写信息，链接数据库查询数据
-            if ($resultData['errorMsgArr'] == null) {
-                $resultData = $this->membersModel->search($searchCondition, $searchName);
-            }
-
-            require('View/searchUserView.php');
+        // 如果没有错写信息，链接数据库查询数据
+        if ($resultData['errorMsgArr'] == null) {
+            $resultData = $this->membersModel->search($searchCondition, $searchName);
         }
+
+        require('View/searchUserView.php');
+
     }
 }
