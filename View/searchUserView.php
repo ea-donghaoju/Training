@@ -18,7 +18,7 @@
 </form><br/>
 <div style="font-size: 16px;color: #FF0000">
     <?php
-        $formHelper->displayError($errorMsgArr);
+        $formHelper->displayError($membersData['errorMsg']);
     ?>
 </div>
 <table width="700px" border="1" cellpadding="0" cellspacing="0">
@@ -29,8 +29,8 @@
         <td>Position</td>
     </tr>
     <?php
-        if(!empty($result)){
-            foreach($result as $key=>$v)
+        if(!empty($membersData['members'])){
+            foreach($membersData['members'] as $key=>$v)
             {
                 echo "<tr>";
                 echo "<td>" . $formHelper->h($v['Name']) . "</td>";

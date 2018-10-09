@@ -33,11 +33,6 @@ class SearchUserController
 
         //调用checkByConditionName方法检测，在$searchName不为空的情况下，根据$searchCondition进行正则判断
         $membersData = $this->membersModel->validateMembers($searchCondition, $searchName);
-        if (is_array($membersData)) {
-            $errorMsgArr = $membersData;
-        } else {
-            $result = $membersData;
-        }
 
         require('View/Helper/formHelper.php');
         $formHelper = new formHelper();

@@ -3,31 +3,37 @@ include('Model/databaseModel.php');
 class MembersModel extends DataBaseModel{
 
     /**
-     *
+     *根据查询条件调用不同的正则验证
      * @param    $searchCondition 验证条件
      * @param    $searchName      验证输入的内容
      * @return   有错误则返回数组，否则则是返回对象
      */
     public function validateMembers($searchCondition, $searchName)
     {
+        //声明数组,储存数据
+        $result['errorMsg'] = [];
+        $result['members'] = [];
+
         //如果查询条件是birthday，则调用生日正则
         if ($searchCondition == 'Birthday') {
-            $errorMsgArr = $this->checkBirthday($searchCondition, $searchName);
-            return $errorMsgArr;
+            $result['errorMsg'] = $this->checkBirthday($searchCondition, $searchName);
         }
 
         //如果查询条件是Name，则调用姓名正则
         if ($searchCondition == 'Name') {
-            $errorMsgArr = $this->checkName($searchCondition, $searchName);
-            return $errorMsgArr;
+            $result['errorMsg'] = $this->checkName($searchCondition, $searchName);
         }
 
         //如果查询条件是department_name或者position_name，则调用部门和职位正则
         if($searchCondition == 'department_name' || $searchCondition == 'position_name') {
-            $errorMsgArr = $this->checkDepartmentPosition($searchCondition, $searchName);
-            return $errorMsgArr;
+            $result['errorMsg'] = $this->checkDepartmentPosition($searchCondition, $searchName);
         }
 
+        //如果没有错误信息，调用search方法
+        if ($result['errorMsg'] == null) {
+            $result['members'] = $this->search($searchCondition, $searchName);
+        }
+        return $result;
     }
 
     /**
@@ -45,8 +51,7 @@ class MembersModel extends DataBaseModel{
             return $errorMsgArr;
         }
 
-        $resultData = $this->search($searchCondition, $searchName);
-        return $resultData;
+        return $errorMsgArr;
     }
 
     /**
@@ -63,8 +68,7 @@ class MembersModel extends DataBaseModel{
             return $errorMsgArr;
         }
 
-        $resultData = $this->search($searchCondition, $searchName);
-        return $resultData;
+        return $errorMsgArr;
     }
 
     /**
@@ -80,8 +84,8 @@ class MembersModel extends DataBaseModel{
             $errorMsgArr[] = '部门或者职位是中文';
             return $errorMsgArr;
         }
-        $resultData = $this->search($searchCondition, $searchName);
-        return $resultData;
+
+        return $errorMsgArr;
     }
 
     /**
