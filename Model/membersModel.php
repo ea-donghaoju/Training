@@ -10,29 +10,23 @@ class MembersModel extends DataBaseModel{
      */
     public function validateMembers($searchCondition, $searchName)
     {
-        //声明数组,储存数据
-        $result['errorMsg'] = [];
-        $result['members'] = [];
+        $result['errorMsgArr'] = [];
 
         //如果查询条件是birthday，则调用生日正则
         if ($searchCondition == 'Birthday') {
-            $result['errorMsg'] = $this->checkBirthday($searchCondition, $searchName);
+            $result['errorMsgArr'] = $this->checkBirthday($searchName);
         }
 
         //如果查询条件是Name，则调用姓名正则
         if ($searchCondition == 'Name') {
-            $result['errorMsg'] = $this->checkName($searchCondition, $searchName);
+            $result['errorMsgArr'] = $this->checkName($searchName);
         }
 
         //如果查询条件是department_name或者position_name，则调用部门和职位正则
         if($searchCondition == 'department_name' || $searchCondition == 'position_name') {
-            $result['errorMsg'] = $this->checkDepartmentPosition($searchCondition, $searchName);
+            $result['errorMsgArr'] = $this->checkDepartmentPosition($searchName);
         }
 
-        //如果没有错误信息，调用search方法
-        if ($result['errorMsg'] == null) {
-            $result['members'] = $this->search($searchCondition, $searchName);
-        }
         return $result;
     }
 
@@ -42,7 +36,7 @@ class MembersModel extends DataBaseModel{
      * @return array
      *
      */
-    private function checkBirthday($searchCondition, $searchName)
+    private function checkBirthday($searchName)
     {
         //声明一个空数组，用来储存错误信息
         $errorMsgArr = [];
@@ -59,7 +53,7 @@ class MembersModel extends DataBaseModel{
      *@param $searchName string 要验证的信息
      *@return array
      */
-    private function checkName($searchCondition, $searchName)
+    private function checkName($searchName)
     {
         //声明一个空数组，用来储存错误信息
         $errorMsgArr = [];
@@ -76,7 +70,7 @@ class MembersModel extends DataBaseModel{
      * @param $searchName string 要验证的信息
      * @return        [type] [description]
      */
-    private function checkDepartmentPosition($searchCondition, $searchName)
+    private function checkDepartmentPosition($searchName)
     {
         //声明一个空数组，用来储存错误信息
         $errorMsgArr = [];
@@ -88,23 +82,24 @@ class MembersModel extends DataBaseModel{
         return $errorMsgArr;
     }
 
-    /**
+       /**
      * 如果正则验证正确，链接数据库查询数据
      * @param $searchName     string 查询内容
      * @param $searchCondition string 查询条件
      * @return array 或者 object
      */
-    private function search($searchCondition, $searchName)
+    public function search($searchCondition, $searchName)
     {
         //声明一个空数组，用来储存错误信息
-        $errorMsgArr = [];
-        $resultData = $this->findData($searchCondition, $searchName);
-        if ($resultData -> num_rows == 0) {
-            $errorMsgArr[] = "未查询到";
-            return $errorMsgArr;
+        $result['errorMsgArr'] = [];
+        $result['members'] = [];
+        $result['members'] = $this->findData($searchCondition, $searchName);
+        if ($result['members'] -> num_rows == 0) {
+            $result['errorMsgArr'][] = "未查询到";
+            return $result;
         }
 
-        return $resultData;
+        return $result;
     }
 
     /**

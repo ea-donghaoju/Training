@@ -15,44 +15,23 @@ class SearchUserController
      */
     public function index()
     {
-        //保留上一次选择的条件值
-        $_SESSION['searchCondition'] = isset($_POST['searchCondition'])?$_POST['searchCondition']:"";
-        $cSession = isset($_SESSION['searchCondition'])?$_SESSION['searchCondition']:"";
+        if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+            require('View/searchUserView.php');
+        }
 
-        //清除搜索内容左右两边的空格
-        $searchName = '';
-        $errorMsgArr = [];
-
-        if (isset($_POST['searchName'])) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $searchCondition = $_POST['searchCondition'];
             $searchName = trim($_POST['searchName']);
-        }
-        $searchCondition = false;
-        if (isset($_POST['searchCondition'])) {
-            $searchCondition = $this->checkPostCondition($_POST['searchCondition']);
-        }
 
-        //调用checkByConditionName方法检测，在$searchName不为空的情况下，根据$searchCondition进行正则判断
-        $membersData = $this->membersModel->validateMembers($searchCondition, $searchName);
+            //根据condition查询条件验证查询内容，$memberData是返回的错误信息
+            $resultData = $this->membersModel->validateMembers($searchCondition, $searchName);
 
-        require('View/Helper/formHelper.php');
-        $formHelper = new formHelper();
-        require('View/searchUserView.php');
+            // 如果没有错写信息，链接数据库查询数据
+            if ($resultData['errorMsgArr'] == null) {
+                $resultData = $this->membersModel->search($searchCondition, $searchName);
+            }
+
+            require('View/searchUserView.php');
+        }
     }
-
-    /**
-     * 验证搜索条件
-     * @param string $postCondition 搜索条件
-     * @return boolin
-     */
-    public function checkPostCondition($postCondition)
-    {
-        if ($postCondition == 'Name'
-            || $postCondition == 'department_name'
-            || $postCondition == 'Birthday'
-            || $postCondition == 'position_name') {
-            return $postCondition;
-        }
-        return false;
-    }
-
 }
