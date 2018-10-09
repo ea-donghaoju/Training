@@ -7,7 +7,7 @@
 <body>
 <h1>社員管理システム</h1>
 <form action="/dev/searchUser" method="post" name="searchData">
-    请输入：<input type="text" name="searchName" placeholder="请输入你的姓名" />&nbsp;&nbsp;
+    请输入：<input type="text" name="searchName" placeholder="请输入内容" />&nbsp;&nbsp;
     选择条件：<select name="searchCondition">
             <option value="Name" <?php if($cSession=='Name'){ ?>selected="selected"<?php } ?>>名字</option>
             <option value="Birthday" <?php if($cSession=='Birthday'){ ?>selected="selected"<?php } ?>>诞生日</option>
@@ -18,7 +18,7 @@
 </form><br/>
 <div style="font-size: 16px;color: #FF0000">
     <?php
-       $formHelper->displayError($errorMsgArr);
+        $formHelper->displayError($errorMsgArr);
     ?>
 </div>
 <table width="700px" border="1" cellpadding="0" cellspacing="0">
