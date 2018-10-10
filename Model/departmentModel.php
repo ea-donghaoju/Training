@@ -1,13 +1,16 @@
 <?php
 include('Model/databaseModel.php');
 class DepartmentModel extends DataBaseModel{
+
+    const DELFLAG_TRUE = 0;
+    const DELFLAG_FALSE = 1;
     /**
      * 获取department表单所以得内容
      * @return object
      */
     public function getDepartmentList()
     {
-        $sql = "select * from department";
+        $sql = "select * from department where delflag = " . self::DELFLAG_FALSE;
         return $this->execSQL($sql);
     }
 
@@ -32,12 +35,23 @@ class DepartmentModel extends DataBaseModel{
     }
 
     /**
+     * @param string 参数
+     * @param    $id 职务id
+     * @return   object
+     */
+    public function delDepartmentById($delid)
+    {
+        $sql = "update department set delflag = " .self::DELFLAG_TRUE ." where id = " . $delid;
+        return $this->execSQL($sql);
+    }
+
+    /**
      * 根据提供的参数修改数据信息
      * @param    $id 要更改的职位id
      * @param    $departmentName 用户要更改的职位名称
      * @return        [type]                 [description]
      */
-    public function updateDepartmentById($id,$departmentName)
+    public function updateDepartmentById($id, $departmentName)
     {
         $sql = "update department set department_name = '" . $departmentName . "' where id = " . $id ."";
         return $this->execSQL($sql);

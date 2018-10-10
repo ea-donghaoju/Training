@@ -1,3 +1,7 @@
+<?php
+    require('View/Helper/formHelper.php');
+    $formHelper = new formHelper();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +17,7 @@
         }
         button{
             cursor: pointer;
+            margin-right: 3px;
         }
     </style>
 </head>
@@ -31,8 +36,8 @@
                 foreach ($departments as $department) {
                     echo "<tr>";
                     echo "<td>" . $department['id'] . "</td>";
-                    echo "<td>" . $department['department_name'] . "</td>";
-                    echo "<td>" . "<button><a href=" . '/dev/departmentUpdated/index?id=' . "" . $department['id'] . ">编辑</a></button>". "</td>";
+                    echo "<td>" . $formHelper->h($department['department_name']) . "</td>";
+                    echo "<td>" . "<button><a href=" . '/dev/departmentUpdated/index?id=' . "" . $department['id'] . ">编辑</a></button>" ."<button><a href=" . '/dev/departmentDel/index?id=' . "" . $department['id'] . ">删除</a></button>". "</td>";
                     echo "</tr>";
                 }
              ?>
