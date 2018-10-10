@@ -2,78 +2,37 @@
 include('Model/MembersModel.php');
 class SearchUserController
 {
+    //生命一个变量,用来储存实例化模型对象
+    public $membersModel = null;
+
+    public function __construct()
+    {
+        $this->membersModel = new MembersModel();
+    }
     /**
      * 搜索页面
      * @return void
      */
     public function index()
     {
-        //保留上一次选择的条件值
-        $_SESSION['searchCondition'] = isset($_POST['searchCondition'])?$_POST['searchCondition']:"";
-        $cSession = isset($_SESSION['searchCondition'])?$_SESSION['searchCondition']:"";
-
-        //清除搜索内容左右两边的空格
-        $searchName = '';
-        $errorMsgArr = [];
-
-        if (isset($_POST['searchName'])) {
-            $searchName = trim($_POST['searchName']);
-        }
-        $searchCondition = false;
-        if (isset($_POST['searchCondition'])) {
-            $searchCondition = $this->checkPostCondition($_POST['searchCondition']);
+        if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+            require('View/searchUserView.php');
+            return;
         }
 
-        //判断输入内容
-        if (!empty($searchName)) {
-            if (preg_match('/^[\w\?\-]+$/', $searchName)) {
-                $result = $this->search($searchCondition, $searchName);//给search()传值
-                if ($result -> num_rows == 0) {
-                    $errorMsgArr[] = "未查询到";
-                }
-            } else {
-                $errorMsgArr[] = "输入类型为英文或数字";
-            }
-        } else {
-            $searchName = "";
-            $searchCondition = "name";
-            $errorMsgArr[] = "请输入内容";
+        //获取post提交的数据
+        $searchCondition = $_POST['searchCondition'];
+        $searchName = trim($_POST['searchName']);
+
+        //根据condition查询条件验证查询内容，$memberData是返回的错误信息
+        $resultData = $this->membersModel->validateMembers($searchCondition, $searchName);
+
+        // 如果没有错写信息，链接数据库查询数据
+        if ($resultData['errorMsgArr'] == null) {
+            $resultData = $this->membersModel->search($searchCondition, $searchName);
         }
-        require('View/Helper/formHelper.php');
-        $formHelper = new formHelper();
+
         require('View/searchUserView.php');
-    }
 
-    /**
-     * 验证搜索条件
-     * @param string $postCondition 搜索条件
-     * @return boolin
-     */
-    public function checkPostCondition($postCondition)
-    {
-        if ($postCondition == 'Name'
-            || $postCondition == 'Department'
-            || $postCondition == 'Birthday') {
-            return $postCondition;
-        }
-        return false;
-    }
-
-    /**
-     * 查询数据
-     * @param string $name 名字
-     * @param string $searchCondition 搜索条件
-     * @return bool
-     */
-    public function search($searchCondition, $name)
-    {
-        $membersModel = new MembersModel();
-        $searchResult = $membersModel->findData($searchCondition, $name);
-        //做判断$search有没有查到
-        if ($searchResult) {
-            return $searchResult;
-        } else {
-            return false;
-        }
     }
 }
