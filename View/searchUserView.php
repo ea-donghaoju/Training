@@ -9,14 +9,27 @@
 <body>
 <h1>社員管理システム</h1>
 <form action="/dev/searchUser" method="post" name="searchData">
-    请输入：<input type="text" name="searchName" placeholder="请输入内容" />&nbsp;&nbsp;
-    选择条件：<select name="searchCondition">
-            <option value="Name" selected>名字</option>
-            <option value="Birthday" >诞生日</option>
-            <option value="department_name" >所属部门</option>
-            <option value="position_name">职位</option>
-          </select>&nbsp;&nbsp;
-    <input type="submit" value="Search"/>
+    <h5> 请在以下文本框输入想要查找的内容：</h5>
+    <table width="700px" color="gray">
+        <tr>
+            <td>姓名</td>
+            <td>生日</td>
+            <td>部门</td>
+            <td>职位</td>
+        </tr>
+    </table>
+    <div>
+        <input type="text" name="Name" placeholder="请输入要查找的姓名" />&nbsp;&nbsp;
+        <input type="text" name="Birthday" placeholder="请输入你要查找的生日日期">&nbsp;&nbsp;
+        <input type="text" name="department_name" placeholder="请输入你要查找的部门名称">&nbsp;&nbsp;
+        <input type="text" name="position_name" placeholder="请输入你要查找的职位名称">
+    </div>
+    选择查找内容的关系：
+    <select name="connection">
+        <option value="or">或者</option>
+        <option value="and">并且</option>
+    </select>
+    <input type="submit" value="查找"/>
 </form><br/>
 <div style="font-size: 16px;color: #FF0000">
    <?php
