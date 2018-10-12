@@ -16,26 +16,23 @@ class MembersModel extends DataBaseModel{
 
         //如果查询条件是birthday，则调用生日正则
         if (!empty($memberData['Birthday'])) {
-            $result['errorMsgArr'] = $this->checkBirthday(trim($memberData['Birthday']));
-            return $result;
+            $result['errorMsgArr'][] = $this->checkBirthday(trim($memberData['Birthday']));
         }
 
         //如果查询条件是Name，则调用姓名正则
         if (!empty($memberData['Name'])) {
-            $result['errorMsgArr'] = $this->checkName(trim($memberData['Name']));
-            return $result;
+            $result['errorMsgArr'][] = $this->checkName(trim($memberData['Name']));
+
         }
 
         //如果查询条件是department_name则调用部门和职位正则
         if (!empty($memberData['department_name'])) {
-            $result['errorMsgArr'] = $this->checkDepartmentPosition(trim($memberData['department_name']));
-            return $result;
+            $result['errorMsgArr'][] = $this->checkDepartmentPosition(trim($memberData['department_name']));
         }
 
         //如果查询条件是position_name则调用部门或者职位的正则
         if (!empty($memberData['position_name'])) {
-            $result['errorMsgArr'] = $this->checkDepartmentPosition(trim($memberData['department_name']));
-            return $result;
+            $result['errorMsgArr'][] = $this->checkDepartmentPosition(trim($memberData['position_name']));
         }
 
         return $result;
@@ -50,13 +47,11 @@ class MembersModel extends DataBaseModel{
     private function checkBirthday($searchName)
     {
         //声明一个空数组，用来储存错误信息
-        $errorMsgArr = [];
         if(!preg_match('/^[0-9]*$/', $searchName)) {
-            $errorMsgArr[] = '生日只能输入数字';
-            return $errorMsgArr;
+            return '生日只能输入数字';
         }
 
-        return $errorMsgArr;
+        return null;
     }
 
     /**
@@ -69,10 +64,9 @@ class MembersModel extends DataBaseModel{
         //声明一个空数组，用来储存错误信息
         $errorMsgArr = [];
         if (!preg_match('/^[a-zA-Z]*$/', $searchName)) {
-            $errorMsgArr[] = '姓名只能是字母';
-            return $errorMsgArr;
+            return '姓名只能是字母';
         }
-        return $errorMsgArr;
+        return null;
     }
 
     /**
@@ -83,13 +77,12 @@ class MembersModel extends DataBaseModel{
     private function checkDepartmentPosition($searchName)
     {
         //声明一个空数组，用来储存错误信息
-        $errorMsgArr = [];
         if (!preg_match('/^[\x80-\xff]*$/', $searchName)) {
-            $errorMsgArr[] = '部门或者职位是中文';
+            $errorMsgArr = '部门或者职位是中文';
             return $errorMsgArr;
         }
 
-        return $errorMsgArr;
+        return null;
     }
 
        /**

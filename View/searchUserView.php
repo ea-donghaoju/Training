@@ -26,8 +26,8 @@
     </div>
     选择查找内容的关系：
     <select name="connection">
-        <option value="or">或者</option>
         <option value="and">并且</option>
+        <option value="and">或者</option>
     </select>
     <input type="submit" value="查找"/>
 </form><br/>
