@@ -21,18 +21,23 @@ class SearchUserController
         }
 
         //获取post提交的数据
-        $searchCondition = $_POST['searchCondition'];
-        $searchName = trim($_POST['searchName']);
+        $memberData = $_POST;
 
         //根据condition查询条件验证查询内容，$memberData是返回的错误信息
-        $resultData = $this->membersModel->validateMembers($searchCondition, $searchName);
+        $resultData = $this->membersModel->validateMembers($memberData);
 
-        // 如果没有错写信息，链接数据库查询数据
-        if ($resultData['errorMsgArr'] == null) {
-            $resultData = $this->membersModel->search($searchCondition, $searchName);
+        // 去除数组中空值，并判断是否有错误，如无错误则链接数据库查询数据
+        if (array_filter($resultData['errorMsgArr'])  == null) {
+            $resultData = $this->membersModel->search($memberData);
+
+            //判断错误信息是否为空，否则返回对象数组
+            if ($resultData['errorMsgArr'] != null) {
+                 $resultData['errorMsgArr'];
+            }
+
+             $resultData['members'];
         }
 
         require('View/searchUserView.php');
-
     }
 }
